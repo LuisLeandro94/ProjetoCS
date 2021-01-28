@@ -1,0 +1,17 @@
+/Users/luisleandro/Desktop/IPCA/Linguagens de Programação I/ProjetoFinal/LP1Supermarket/Supermercado/Supermercado/obj/Debug/netcoreapp3.1/Supermercado.csprojAssemblyReference.cache
+/Users/luisleandro/Desktop/IPCA/Linguagens de Programação I/ProjetoFinal/LP1Supermarket/Supermercado/Supermercado/obj/Debug/netcoreapp3.1/Supermercado.AssemblyInfoInputs.cache
+/Users/luisleandro/Desktop/IPCA/Linguagens de Programação I/ProjetoFinal/LP1Supermarket/Supermercado/Supermercado/obj/Debug/netcoreapp3.1/Supermercado.AssemblyInfo.cs
+/Users/luisleandro/Desktop/IPCA/Linguagens de Programação I/ProjetoFinal/LP1Supermarket/Supermercado/Supermercado/obj/Debug/netcoreapp3.1/Supermercado.csproj.CoreCompileInputs.cache
+C:\Users\ferma\Dropbox\My PC (LAPTOP-OQG2DRPV)\Desktop\LP1Supermarket2\Supermercado\Supermercado\obj\Debug\netcoreapp3.1\Supermercado.csprojAssemblyReference.cache
+C:\Users\ferma\Dropbox\My PC (LAPTOP-OQG2DRPV)\Desktop\LP1Supermarket2\Supermercado\Supermercado\obj\Debug\netcoreapp3.1\Supermercado.AssemblyInfoInputs.cache
+C:\Users\ferma\Dropbox\My PC (LAPTOP-OQG2DRPV)\Desktop\LP1Supermarket2\Supermercado\Supermercado\obj\Debug\netcoreapp3.1\Supermercado.AssemblyInfo.cs
+C:\Users\ferma\Dropbox\My PC (LAPTOP-OQG2DRPV)\Desktop\LP1Supermarket2\Supermercado\Supermercado\obj\Debug\netcoreapp3.1\Supermercado.csproj.CoreCompileInputs.cache
+C:\Users\ferma\Dropbox\My PC (LAPTOP-OQG2DRPV)\Desktop\LP1Supermarket2\Supermercado\Supermercado\bin\Debug\netcoreapp3.1\Supermercado.exe
+C:\Users\ferma\Dropbox\My PC (LAPTOP-OQG2DRPV)\Desktop\LP1Supermarket2\Supermercado\Supermercado\bin\Debug\netcoreapp3.1\Supermercado.deps.json
+C:\Users\ferma\Dropbox\My PC (LAPTOP-OQG2DRPV)\Desktop\LP1Supermarket2\Supermercado\Supermercado\bin\Debug\netcoreapp3.1\Supermercado.runtimeconfig.json
+C:\Users\ferma\Dropbox\My PC (LAPTOP-OQG2DRPV)\Desktop\LP1Supermarket2\Supermercado\Supermercado\bin\Debug\netcoreapp3.1\Supermercado.runtimeconfig.dev.json
+C:\Users\ferma\Dropbox\My PC (LAPTOP-OQG2DRPV)\Desktop\LP1Supermarket2\Supermercado\Supermercado\bin\Debug\netcoreapp3.1\Supermercado.dll
+C:\Users\ferma\Dropbox\My PC (LAPTOP-OQG2DRPV)\Desktop\LP1Supermarket2\Supermercado\Supermercado\bin\Debug\netcoreapp3.1\Supermercado.pdb
+C:\Users\ferma\Dropbox\My PC (LAPTOP-OQG2DRPV)\Desktop\LP1Supermarket2\Supermercado\Supermercado\obj\Debug\netcoreapp3.1\Supermercado.dll
+C:\Users\ferma\Dropbox\My PC (LAPTOP-OQG2DRPV)\Desktop\LP1Supermarket2\Supermercado\Supermercado\obj\Debug\netcoreapp3.1\Supermercado.pdb
+C:\Users\ferma\Dropbox\My PC (LAPTOP-OQG2DRPV)\Desktop\LP1Supermarket2\Supermercado\Supermercado\obj\Debug\netcoreapp3.1\Supermercado.genruntimeconfig.cache
