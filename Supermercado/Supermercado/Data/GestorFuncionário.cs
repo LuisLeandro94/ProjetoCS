@@ -6,11 +6,13 @@ using System.Text;
 
 namespace Supermercado
 {
+    [Serializable]
     class GestorFuncionário
     {
 
         static public List<Funcionário> listaFuncionarios = new List<Funcionário>();
 
+        #region Gravar Funcionário
         public static void GravarFuncionario()
         {
             string fileLocation = Directory.GetCurrentDirectory();
@@ -23,7 +25,9 @@ namespace Supermercado
             f.Serialize(fileStream, GestorFuncionário.listaFuncionarios);
             fileStream.Close();
         }
+        #endregion
 
+        #region Ler Funcionário
         public static void LerFuncionario()
         {
             string location = Directory.GetCurrentDirectory();
@@ -41,9 +45,10 @@ namespace Supermercado
               
                 fileStream.Close();
             }
-
         }
+        #endregion
 
+        #region Listar na Console
         public static void EscreverListaConsola()
         {
             string result = "";
@@ -81,8 +86,8 @@ namespace Supermercado
 
                 Console.WriteLine();
                 result += "";
-
             }
         }
+        #endregion
     }
 }

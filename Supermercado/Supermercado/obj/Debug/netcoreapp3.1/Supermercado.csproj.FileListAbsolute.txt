@@ -21,3 +21,10 @@ C:\Users\Luis Ribeiro\Desktop\ProjetoCS\Supermercado\Supermercado\obj\Debug\netc
 C:\Users\Luis Ribeiro\Desktop\ProjetoCS\Supermercado\Supermercado\obj\Debug\netcoreapp3.1\Supermercado.csproj.CoreCompileInputs.cache
 C:\Users\Luis Ribeiro\Desktop\ProjetoCS\Supermercado\Supermercado\obj\Debug\netcoreapp3.1\Supermercado.dll
 C:\Users\Luis Ribeiro\Desktop\ProjetoCS\Supermercado\Supermercado\obj\Debug\netcoreapp3.1\Supermercado.pdb
+C:\Users\Luis Ribeiro\Desktop\ProjetoCS\Supermercado\Supermercado\bin\Debug\netcoreapp3.1\Supermercado.exe
+C:\Users\Luis Ribeiro\Desktop\ProjetoCS\Supermercado\Supermercado\bin\Debug\netcoreapp3.1\Supermercado.deps.json
+C:\Users\Luis Ribeiro\Desktop\ProjetoCS\Supermercado\Supermercado\bin\Debug\netcoreapp3.1\Supermercado.runtimeconfig.json
+C:\Users\Luis Ribeiro\Desktop\ProjetoCS\Supermercado\Supermercado\bin\Debug\netcoreapp3.1\Supermercado.runtimeconfig.dev.json
+C:\Users\Luis Ribeiro\Desktop\ProjetoCS\Supermercado\Supermercado\bin\Debug\netcoreapp3.1\Supermercado.dll
+C:\Users\Luis Ribeiro\Desktop\ProjetoCS\Supermercado\Supermercado\bin\Debug\netcoreapp3.1\Supermercado.pdb
+C:\Users\Luis Ribeiro\Desktop\ProjetoCS\Supermercado\Supermercado\obj\Debug\netcoreapp3.1\Supermercado.genruntimeconfig.cache

@@ -24,7 +24,6 @@ namespace Supermercado
         public EnumCargo cargo { get; set; }
         #endregion
 
-
         static public List<Gerente> gerentList = new List<Gerente>();
         static public List<Repositor> repositorList = new List<Repositor>();
 
@@ -34,7 +33,7 @@ namespace Supermercado
             active = true;
         }
 
-        public Funcionário(long id, string firstName, string lastName, string phoneNumber, string address, DateTime birthDate, decimal salary, string userName, string password, bool active, EnumCargo cargo)
+        public Funcionário(string firstName, string lastName, string phoneNumber, string address, DateTime birthDate, decimal salary, string userName, string password, bool active, EnumCargo cargo)
         {
             this.id = RandomID();
             this.firstName = firstName;
@@ -144,7 +143,7 @@ namespace Supermercado
             var cargo = Convert.ToInt32(Console.ReadLine());
             var cargo_ = (EnumCargo)cargo;
 
-            Funcionário a = new Funcionário(id, firstName, lastName, phoneNumber, address, birthDate, salary, username, password, cargo_);
+            Funcionário a = new Funcionário(firstName, lastName, phoneNumber, address, birthDate, salary, username, password,active, cargo_);
             GestorFuncionário.listaFuncionarios.Add(a);
             GestorFuncionário.GravarFuncionario();
 
@@ -209,7 +208,6 @@ namespace Supermercado
             Console.Clear();
         }
         #endregion
-
 
     }
 }
