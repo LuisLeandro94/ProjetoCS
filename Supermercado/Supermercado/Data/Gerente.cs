@@ -13,10 +13,6 @@ namespace Supermercado
         
         public Gerente() : base()
         {
-           
-            
-            //this.gerenteList = new List<Gerente>();
-            //this.repositorList = new List<Repositor>();
         }
         
         public string g_userName { get; set; }
@@ -27,7 +23,7 @@ namespace Supermercado
         {
             this.userName = g_userName;
             this.password = g_password;
-            this.cargo = "Gerente";
+            this.cargo = cargo;
         }
 
         /* public override string ToString()
@@ -71,7 +67,7 @@ namespace Supermercado
                         Console.WriteLine("ID A REMOVER: ");
                         remover = int.Parse(Console.ReadLine());
 
-                        Trabalhadores.trabalhadores.RemoveAt(remover);
+                        GestorFuncionário.listaFuncionarios.RemoveAt(remover);
 
                         //CÓDIGO REMOVER NÃO ESTÁ A FUNCIONAR MAS TEM A FORMA ANTERIOR
 
@@ -111,7 +107,7 @@ namespace Supermercado
         {
             int i = 0;
             string result ="ID" + "   " + "Nome" + "          " + "UserName " + "      " + "PassWord" + "\n";
-            foreach (Funcionário f in Trabalhadores.trabalhadores)
+            foreach (Funcionário f in GestorFuncionário.trabalhadores)
             {
                 result += i++ + f.firstName + " " + f.lastName + "     " + f.userName + "         " + f.password + " \n";
             }
@@ -125,16 +121,16 @@ namespace Supermercado
         public bool removeFromeEmployeeList(string nome)
         {
             int indexAremover = -1;
-            for (int i = 0; i < Trabalhadores.trabalhadores.Count; i++)
+            for (int i = 0; i < GestorFuncionário.trabalhadores.Count; i++)
             {
-                if (Trabalhadores.trabalhadores[i].userName.ToLower().Equals(nome.ToLower()))
+                if (GestorFuncionário.trabalhadores[i].userName.ToLower().Equals(nome.ToLower()))
                 {
                     indexAremover = i;
                 }
             }
             if (indexAremover != -1)
             {
-                Trabalhadores.trabalhadores.RemoveAt(indexAremover);
+                GestorFuncionário.trabalhadores.RemoveAt(indexAremover);
                 return true;
             }
             return false;

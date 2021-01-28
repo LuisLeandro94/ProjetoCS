@@ -21,7 +21,7 @@ namespace Supermercado
         {
             this.userName = r_userName;
             this.password = r_password;
-            this.cargo = "Repositor";
+            this.cargo = cargo;
         }
 
         public void MenuRepostior()

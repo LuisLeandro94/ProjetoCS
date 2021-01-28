@@ -6,10 +6,10 @@ using System.Text;
 
 namespace Supermercado
 {
-    class Trabalhadores
+    class GestorFuncionário
     {
 
-        static public List<Funcionário> trabalhadores = new List<Funcionário>();
+        static public List<Funcionário> listaFuncionarios = new List<Funcionário>();
 
         public static void GravarFuncionario()
         {
@@ -20,7 +20,7 @@ namespace Supermercado
             FileStream fileStream = File.Create(fileName);
             BinaryFormatter f = new BinaryFormatter();
 
-            f.Serialize(fileStream, Trabalhadores.trabalhadores);
+            f.Serialize(fileStream, GestorFuncionário.listaFuncionarios);
             fileStream.Close();
         }
 
@@ -29,7 +29,7 @@ namespace Supermercado
             string location = Directory.GetCurrentDirectory();
             string filename = "listaDeFuncionarios.txt";
 
-            Trabalhadores.trabalhadores.Clear();
+            GestorFuncionário.listaFuncionarios.Clear();
             if (File.Exists(filename))
             {
                 FileStream fileStream = File.OpenRead(filename);
@@ -37,7 +37,7 @@ namespace Supermercado
 
               
                     List<Funcionário> g = f.Deserialize(fileStream) as List<Funcionário>;
-                    Trabalhadores.trabalhadores=g;
+                    GestorFuncionário.listaFuncionarios = g;
               
                 fileStream.Close();
             }
@@ -55,26 +55,22 @@ namespace Supermercado
             Console.WriteLine("###########################################");
             Console.ResetColor();
 
-            foreach (Funcionário f in Trabalhadores.trabalhadores)
+            foreach (Funcionário f in GestorFuncionário.listaFuncionarios)
             {
 
-                Console.Write("Nome: ");
+                Console.Write("Name: ");
                 Console.WriteLine(f.firstName);
-                Console.Write("LastName: ");
+                Console.Write("Last Name: ");
                 Console.Write(f.lastName);
-                Console.Write("\nPhoneNumber: ");
+                Console.Write("\nPhone Number: ");
                 Console.Write(f.phoneNumber);
                 Console.Write("\nAddress: ");
                 Console.Write(f.address);
-                Console.Write("\nBirthDate: ");
-                Console.Write(f.birthDate.ToString("dd/MM/yyyy"));
                 Console.Write("\nSalary: ");
                 Console.Write(f.salary);
-                Console.Write("\nUserName: ");
-                Console.Write(f.userName);
-                Console.Write("\nPassword: ");
+                Console.Write("\nUsername: ");
                 Console.Write(f.password);
-                Console.Write("\nCargo: ");
+                Console.Write("\nPosition: ");
                 Console.Write(f.cargo);
                 Console.Write("\nActive: ");
                 Console.Write(f.active);
@@ -87,9 +83,6 @@ namespace Supermercado
                 result += "";
 
             }
-          
         }
-
-
     }
 }

@@ -7,7 +7,7 @@ namespace Supermercado
     {
         static void Main(string[] args)
         {
-            Trabalhadores.LerFuncionario();
+            GestorFuncionário.LerFuncionario();
            
             Funcionário f = new Funcionário();
             //Funcionário.employeeList.Add(new Funcionário("luis", "Ribeiro", "967852669","Rua da Boavista",29/05/2002 , 384 , "funcionario", "teste"));
@@ -24,16 +24,23 @@ namespace Supermercado
             while (escolha != 7)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("|------------------------------------|");   
-                Console.WriteLine("|        SUPERMERCADO                |");
-                Console.WriteLine("|------------------------------------|");
+                Console.WriteLine("######################################");
+                Console.WriteLine("#                                    #");
+                Console.WriteLine("#            SUPERMERCADO            #");
+                Console.WriteLine("#                                    #");
+                Console.WriteLine("######################################");
                 Console.ResetColor();
                 Console.ForegroundColor = ConsoleColor.Blue;
-                Console.WriteLine("|    1-LISTA DE FUNCIONÁRIOS (TESTE) |");
-                Console.WriteLine("|    2-REGISTAR                      |");
-                Console.WriteLine("|    3-LOGIN                         |");
-                Console.WriteLine("|    0-SAIR                          |");
-                Console.WriteLine("|------------------------------------|");
+                Console.WriteLine("#                                    #");
+                Console.WriteLine("#    1-LISTA DE FUNCIONÁRIOS (TESTE) #");
+                Console.WriteLine("#                                    #");
+                Console.WriteLine("#    2-REGISTAR                      #");
+                Console.WriteLine("#                                    #");
+                Console.WriteLine("#    3-LOGIN                         #");
+                Console.WriteLine("#                                    #");
+                Console.WriteLine("#    0-SAIR                          #");
+                Console.WriteLine("#                                    #");
+                Console.WriteLine("######################################");
                 Console.ResetColor();
 
                 escolha = int.Parse(Console.ReadLine());
@@ -44,7 +51,7 @@ namespace Supermercado
                 {
                     case 1:
 
-                        Trabalhadores.EscreverListaConsola();
+                        GestorFuncionário.EscreverListaConsola();
                         break;
 
                     case 2:
