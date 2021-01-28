@@ -16,6 +16,7 @@ namespace Supermercado
         public string lastName { get; set; }
         public string phoneNumber { get; set; }
         public string address { get; set; }
+        public DateTime birthDate { get; set; }
         public decimal salary { get; set; }
         public string userName { get; set; }
         public string password { get; set; }
@@ -33,13 +34,14 @@ namespace Supermercado
             active = true;
         }
 
-        public Funcionário(long id, string firstName, string lastName, string phoneNumber, string address, decimal salary, string userName, string password, bool active, EnumCargo cargo)
+        public Funcionário(long id, string firstName, string lastName, string phoneNumber, string address, DateTime birthDate, decimal salary, string userName, string password, bool active, EnumCargo cargo)
         {
             this.id = RandomID();
             this.firstName = firstName;
             this.lastName = lastName;
             this.phoneNumber = phoneNumber;
             this.address = address;
+            this.birthDate = birthDate;
             this.salary = salary;
             this.userName = userName;
             this.password = password;
@@ -80,10 +82,10 @@ namespace Supermercado
                 Console.Write(f.phoneNumber);
                 Console.Write("\nAddress: ");
                 Console.Write(f.address);
-                Console.Write("\nBirthDate: ");
-                Console.Write(f.birthDate.ToString("dd/MM/yyyy"));
                 Console.Write("\nSalary: ");
                 Console.Write(f.salary);
+                Console.Write("\nBirth Date: ");
+                Console.Write(f.birthDate.ToString("dd / MM / yyyy"));
                 Console.Write("\nUserName: ");
                 Console.Write(f.userName);
                 Console.Write("\nPassword: ");
@@ -129,6 +131,8 @@ namespace Supermercado
             var address = Console.ReadLine();
             Console.WriteLine("\n Your salary: ");
             decimal salary = Convert.ToDecimal(Console.ReadLine());
+            Console.WriteLine("\n Your birth date: (dd/MM/YYYY)");
+            DateTime birthDate = Convert.ToDateTime(Console.ReadLine()); 
             Console.WriteLine("\n Wanted username:");
             var username = Console.ReadLine();
             Console.WriteLine("\n Wanted password(min. 8 char):");
@@ -140,7 +144,7 @@ namespace Supermercado
             var cargo = Convert.ToInt32(Console.ReadLine());
             var cargo_ = (EnumCargo)cargo;
 
-            Funcionário a = new Funcionário(id, firstName, lastName, phoneNumber, address, salary, username, password, cargo_);
+            Funcionário a = new Funcionário(id, firstName, lastName, phoneNumber, address, birthDate, salary, username, password, cargo_);
             GestorFuncionário.listaFuncionarios.Add(a);
             GestorFuncionário.GravarFuncionario();
 

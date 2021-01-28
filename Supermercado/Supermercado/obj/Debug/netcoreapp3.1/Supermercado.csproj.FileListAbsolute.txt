@@ -15,3 +15,9 @@ C:\Users\ferma\Dropbox\My PC (LAPTOP-OQG2DRPV)\Desktop\LP1Supermarket2\Supermerc
 C:\Users\ferma\Dropbox\My PC (LAPTOP-OQG2DRPV)\Desktop\LP1Supermarket2\Supermercado\Supermercado\obj\Debug\netcoreapp3.1\Supermercado.dll
 C:\Users\ferma\Dropbox\My PC (LAPTOP-OQG2DRPV)\Desktop\LP1Supermarket2\Supermercado\Supermercado\obj\Debug\netcoreapp3.1\Supermercado.pdb
 C:\Users\ferma\Dropbox\My PC (LAPTOP-OQG2DRPV)\Desktop\LP1Supermarket2\Supermercado\Supermercado\obj\Debug\netcoreapp3.1\Supermercado.genruntimeconfig.cache
+C:\Users\Luis Ribeiro\Desktop\ProjetoCS\Supermercado\Supermercado\obj\Debug\netcoreapp3.1\Supermercado.csprojAssemblyReference.cache
+C:\Users\Luis Ribeiro\Desktop\ProjetoCS\Supermercado\Supermercado\obj\Debug\netcoreapp3.1\Supermercado.AssemblyInfoInputs.cache
+C:\Users\Luis Ribeiro\Desktop\ProjetoCS\Supermercado\Supermercado\obj\Debug\netcoreapp3.1\Supermercado.AssemblyInfo.cs
+C:\Users\Luis Ribeiro\Desktop\ProjetoCS\Supermercado\Supermercado\obj\Debug\netcoreapp3.1\Supermercado.csproj.CoreCompileInputs.cache
+C:\Users\Luis Ribeiro\Desktop\ProjetoCS\Supermercado\Supermercado\obj\Debug\netcoreapp3.1\Supermercado.dll
+C:\Users\Luis Ribeiro\Desktop\ProjetoCS\Supermercado\Supermercado\obj\Debug\netcoreapp3.1\Supermercado.pdb

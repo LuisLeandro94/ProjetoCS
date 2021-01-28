@@ -14,29 +14,6 @@ namespace Supermercado
         public Gerente() : base()
         {
         }
-        
-        public string g_userName { get; set; }
-        public string g_password { get; set; }
-        public string g_cargo { get; set; }
-
-        public Gerente(string g_userName, string g_password)
-        {
-            this.userName = g_userName;
-            this.password = g_password;
-            this.cargo = cargo;
-        }
-
-        /* public override string ToString()
-         {
-             string result = "Nome" + "       " + "Password " + "    " + "Cargo" + "\n";
-             foreach (Gerente g in this.gerenteList)
-             {
-                 result += g.g_userName + " " + g.g_password + "     " + g.g_cargo + "   \n";
-             }
-
-             return result;
-        }
-        */
 
         public void MenuGerente()
         {
@@ -107,7 +84,7 @@ namespace Supermercado
         {
             int i = 0;
             string result ="ID" + "   " + "Nome" + "          " + "UserName " + "      " + "PassWord" + "\n";
-            foreach (Funcionário f in GestorFuncionário.trabalhadores)
+            foreach (Funcionário f in GestorFuncionário.listaFuncionarios)
             {
                 result += i++ + f.firstName + " " + f.lastName + "     " + f.userName + "         " + f.password + " \n";
             }
@@ -121,16 +98,16 @@ namespace Supermercado
         public bool removeFromeEmployeeList(string nome)
         {
             int indexAremover = -1;
-            for (int i = 0; i < GestorFuncionário.trabalhadores.Count; i++)
+            for (int i = 0; i < GestorFuncionário.listaFuncionarios.Count; i++)
             {
-                if (GestorFuncionário.trabalhadores[i].userName.ToLower().Equals(nome.ToLower()))
+                if (GestorFuncionário.listaFuncionarios[i].userName.ToLower().Equals(nome.ToLower()))
                 {
                     indexAremover = i;
                 }
             }
             if (indexAremover != -1)
             {
-                GestorFuncionário.trabalhadores.RemoveAt(indexAremover);
+                GestorFuncionário.listaFuncionarios.RemoveAt(indexAremover);
                 return true;
             }
             return false;

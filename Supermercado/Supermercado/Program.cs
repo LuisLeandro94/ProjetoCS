@@ -12,8 +12,8 @@ namespace Supermercado
             Funcionário f = new Funcionário();
             //Funcionário.employeeList.Add(new Funcionário("luis", "Ribeiro", "967852669","Rua da Boavista",29/05/2002 , 384 , "funcionario", "teste"));
             //Funcionário.employeeList.Add(new Funcionário("Marco", "Oliveira", "S967852669", "gerente", "teste"));
-            Funcionário.gerentList.Add(new Gerente("gerente", "teste"));
-            Funcionário.repositorList.Add(new Repositor("repositor", "teste"));
+            //Funcionário.gerentList.Add(new Gerente("gerente", "teste"));
+            //Funcionário.repositorList.Add(new Repositor("repositor", "teste"));
            
            
 
@@ -61,7 +61,7 @@ namespace Supermercado
                        break;
 
                     case 3:
-                        f.LoginForm();
+                        Funcionário.LoginForm();
                       break;
                                 
                     case 0:
