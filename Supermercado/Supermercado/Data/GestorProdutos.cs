@@ -8,7 +8,7 @@ using System.Text;
 namespace Supermercado.Data
 {
     [Serializable]
-    static class GestorProdutos
+    class GestorProdutos
     {
         static public List<Produtos> listaProdutos = new List<Produtos>();
 
@@ -64,6 +64,7 @@ namespace Supermercado.Data
         #region Listar na Console
         public static void EscreverListaConsola()
         {
+            string result = "";
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("###########################################");
             Console.WriteLine("#                                         #");
@@ -76,30 +77,29 @@ namespace Supermercado.Data
             {
                 foreach (Produtos p in GestorProdutos.listaProdutos)
                 {
-                    if (p.stock != 0)
-                    {
-                        DataTable dt = new DataTable();
-                        dt.Clear();
-                        dt.Columns.Add("ID");
-                        dt.Columns.Add("NAME");
-                        dt.Columns.Add("BARCODE NUMBER");
-                        dt.Columns.Add("PRICE");
-                        dt.Columns.Add("STOCK");
-                        DataRow row = dt.NewRow();
-                        row["ID"] = p.id;
-                        row["NAME"] = p.productName;
-                        row["BARCODE NUMBER"] = p.barcodeNumber;
-                        row["PRICE"] = p.unitPrice;
-                        row["STOCK"] = p.stock;
-                        dt.Rows.Add(row);
-                        Console.WriteLine("###########################################");
-                        Console.ResetColor();
-                    }  
+                    Console.Write("ID: ");
+                    Console.Write(p.id);
+                    Console.Write("\nBarcode Number: ");
+                    Console.Write(p.barcodeNumber);
+                    Console.Write("\nProduct Name: ");
+                    Console.Write(p.productName);
+                    Console.Write("\nUnit Price: ");
+                    Console.Write(p.unitPrice);
+                    Console.Write("\nStock: ");
+                    Console.Write(p.stock);
+                    
+                 
+                    Console.WriteLine("\n###########################################");
+                    Console.ResetColor();
+
+
+                    Console.WriteLine();
+                    result += "";
                 }
             }
-            catch(Exception a)
+            catch (Exception a)
             {
-                Console.WriteLine("Couldn't list the products! Reason:" + a.Message);
+                Console.WriteLine(" Couldn't print list! Reason: " + a.Message);
             }
         }
         #endregion
