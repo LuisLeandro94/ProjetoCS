@@ -13,18 +13,7 @@ namespace Supermercado
 
         }
 
-        public string r_userName { get; set; }
-        public string r_password { get; set; }
-        public string r_cargo { get; set; }
-
-        public Repositor(string r_userName, string r_password)
-        {
-            this.userName = r_userName;
-            this.password = r_password;
-            this.cargo = cargo;
-        }
-
-        public void MenuRepostior()
+        public void MenuRepositor()
         {
             int escolha = 0;
             while (escolha != 7)

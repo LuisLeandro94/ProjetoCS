@@ -10,18 +10,10 @@ namespace Supermercado
             GestorFuncionário.LerFuncionario();
            
             Funcionário f = new Funcionário();
-            //Funcionário.employeeList.Add(new Funcionário("luis", "Ribeiro", "967852669","Rua da Boavista",29/05/2002 , 384 , "funcionario", "teste"));
-            //Funcionário.employeeList.Add(new Funcionário("Marco", "Oliveira", "S967852669", "gerente", "teste"));
-            //Funcionário.gerentList.Add(new Gerente("gerente", "teste"));
-            //Funcionário.repositorList.Add(new Repositor("repositor", "teste"));
            
-           
-
-
-
             int escolha = 0;
            
-            while (escolha != 7)
+            while (escolha != 0)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("######################################");
@@ -65,7 +57,7 @@ namespace Supermercado
                       break;
                                 
                     case 0:
-                        Console.WriteLine("Escolheu sair");
+                        Console.WriteLine("");
                         break;
                     default:
                     Console.WriteLine("Opção Inválida");
