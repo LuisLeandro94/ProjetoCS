@@ -8,7 +8,8 @@ namespace Supermercado
         static void Main(string[] args)
         {
             GestorFuncionário.LerFuncionario();
-           
+
+            Produtos p = new Produtos();
             Funcionário f = new Funcionário();
            
             int escolha = 0;
@@ -29,6 +30,9 @@ namespace Supermercado
                 Console.WriteLine("#    2-REGISTAR                      #");
                 Console.WriteLine("#                                    #");
                 Console.WriteLine("#    3-LOGIN                         #");
+                Console.WriteLine("#                                    #");
+
+                Console.WriteLine("#    4- INSERIR PRODUTO (TESTE)      #");
                 Console.WriteLine("#                                    #");
                 Console.WriteLine("#    0-SAIR                          #");
                 Console.WriteLine("#                                    #");
@@ -55,7 +59,9 @@ namespace Supermercado
                     case 3:
                         Funcionário.LoginForm();
                       break;
-                                
+                    case 4:
+                        //nao consigo chamar o produtos....
+                        break;
                     case 0:
                         Console.WriteLine("");
                         break;
