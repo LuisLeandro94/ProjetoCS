@@ -102,7 +102,7 @@ namespace Supermercado
                 GestorProdutos.GravarProduto();
 
 
-                Console.WriteLine("\nUser created successfully!");
+                Console.WriteLine("\nProduct created successfully!");
             }
             catch(Exception a)
             {
@@ -112,7 +112,7 @@ namespace Supermercado
         }
         #endregion
 
-        #region Listar Produtos
+        #region Ler Produtos
         public void ListProduct()
         {
             string fileName = "produtosEmStock.txt";

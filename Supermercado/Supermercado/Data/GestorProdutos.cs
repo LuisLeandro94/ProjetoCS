@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
@@ -63,7 +64,6 @@ namespace Supermercado.Data
         #region Listar na Console
         public static void EscreverListaConsola()
         {
-            string result = "";
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("###########################################");
             Console.WriteLine("#                                         #");
@@ -76,26 +76,25 @@ namespace Supermercado.Data
             {
                 foreach (Produtos p in GestorProdutos.listaProdutos)
                 {
-                    Console.Write("ID");
-                    Console.WriteLine(p.id);
-                    Console.Write("Barcode Number: ");
-                    Console.Write(p.barcodeNumber);
-                    Console.Write("Product Name: ");
-                    Console.Write(p.productName);
-                    Console.Write("\nUnit Price: ");
-                    Console.Write(p.unitPrice);
-                    Console.Write("\nStock: ");
-                    Console.Write(p.stock);
-                    Console.Write("\nActive: ");
-                    Console.Write(p.active);
-
-
-                    Console.WriteLine("\n###########################################");
-                    Console.ResetColor();
-
-
-                    Console.WriteLine();
-                    result += "";
+                    if (p.stock != 0)
+                    {
+                        DataTable dt = new DataTable();
+                        dt.Clear();
+                        dt.Columns.Add("ID");
+                        dt.Columns.Add("NAME");
+                        dt.Columns.Add("BARCODE NUMBER");
+                        dt.Columns.Add("PRICE");
+                        dt.Columns.Add("STOCK");
+                        DataRow row = dt.NewRow();
+                        row["ID"] = p.id;
+                        row["NAME"] = p.productName;
+                        row["BARCODE NUMBER"] = p.barcodeNumber;
+                        row["PRICE"] = p.unitPrice;
+                        row["STOCK"] = p.stock;
+                        dt.Rows.Add(row);
+                        Console.WriteLine("###########################################");
+                        Console.ResetColor();
+                    }  
                 }
             }
             catch(Exception a)

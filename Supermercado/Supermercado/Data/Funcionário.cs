@@ -152,11 +152,20 @@ namespace Supermercado
                     address = Console.ReadLine();
                 }
                 Console.WriteLine("Your salary: ");
-                decimal salary = Convert.ToDecimal(Console.ReadLine());
-                while (salary < 600)
+                decimal salary;
+                bool result = decimal.TryParse(Console.ReadLine(), out salary);
+                if (result)
                 {
-                    Console.WriteLine("Don't be a liar!");
-                    salary = Convert.ToDecimal(Console.ReadLine());
+                    while (salary < 600)
+                    {
+                        Console.WriteLine("Don't be a liar!");
+                        salary = Convert.ToDecimal(Console.ReadLine());
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("That's not a number!");
+                    return;
                 }
                 Console.WriteLine("Your birth date: (dd/MM/YYYY)");
                 DateTime birthDate = Convert.ToDateTime(Console.ReadLine());

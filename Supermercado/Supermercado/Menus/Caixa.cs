@@ -1,4 +1,5 @@
-﻿using Supermercado.Menus;
+﻿using Supermercado.Data;
+using Supermercado.Menus;
 using System;
 namespace Supermercado
 {
@@ -46,7 +47,7 @@ namespace Supermercado
                 switch (escolha)
                 {
                     case 1:
-                        //VENDER
+                        GestorProdutos.EscreverListaConsola();
                         break;
                     case 2:
                         //LISTAR FATURA
