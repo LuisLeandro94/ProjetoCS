@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Supermercado.Data;
+using Supermercado.Menus;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -13,22 +15,41 @@ namespace Supermercado
 
         }
 
+        #region Menu Repositor
         public void MenuRepositor()
         {
+            GestorProdutos.LerProduto();
+
+            Produtos p = new Produtos();
+            Funcionário f = new Funcionário();
+
             int escolha = 0;
             while (escolha != 7)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("|--------------------------------|");
-                Console.WriteLine("|        MENU - REPOSITOR        |");
-                Console.WriteLine("|--------------------------------|");
+                Console.WriteLine("####################################################");
+                Console.WriteLine("#                                                  #");
+                Console.WriteLine("#                 MENU - REPOSITOR                 #");
+                Console.WriteLine("#                                                  #");
+                Console.WriteLine("####################################################");
                 Console.ResetColor();
                 Console.ForegroundColor = ConsoleColor.Blue;
-                Console.WriteLine("|    1- Adicionar Produtos       |");
-                Console.WriteLine("|    2- Limpar Stock             |");
-                Console.WriteLine("|    3- Remover Produto          |");
-                Console.WriteLine("|    0-Sair                      |");
-                Console.WriteLine("|--------------------------------|");
+                Console.WriteLine("#                                                  #");
+                Console.WriteLine("#         1 - ADICIONAR PRODUTOS                   #");
+                Console.WriteLine("#                                                  #");
+                Console.WriteLine("#--------------------------------------------------#");
+                Console.WriteLine("#                                                  #");
+                Console.WriteLine("#         2 - LIMPAR STOCK                         #");
+                Console.WriteLine("#                                                  #");
+                Console.WriteLine("#--------------------------------------------------#");
+                Console.WriteLine("#                                                  #");
+                Console.WriteLine("#         3 - REMOVER PRODUTO                      #");
+                Console.WriteLine("#                                                  #");
+                Console.WriteLine("#--------------------------------------------------#");
+                Console.WriteLine("#                                                  #");
+                Console.WriteLine("#         0 - SAIR                                 #");
+                Console.WriteLine("#                                                  #");
+                Console.WriteLine("####################################################");
                 Console.ResetColor();
 
                 escolha = int.Parse(Console.ReadLine());
@@ -37,22 +58,18 @@ namespace Supermercado
                 switch (escolha)
                 {
                     case 1:
-                        SaveProduct();
-                        
+                        p.CreateProduct();
                         break;
                     case 2:
                         //Produtos.productList.Clear();
                         limparLista();
-
                         break;
                     case 3:
                         Console.WriteLine("Remover Produto");
                         break;
-
                     case 0:
-                        LoginForm();
+                        MenuInicial.InitialMenu();
                         break;
-
                     default:
                         Console.WriteLine("Opção Inválida");
                         break;
@@ -61,7 +78,9 @@ namespace Supermercado
                 Console.Clear();
             }
         }
+        #endregion
 
+        /*
         #region Criar um Produto
         public void SaveProduct()
         {
@@ -139,25 +158,35 @@ namespace Supermercado
 
         }
         #endregion
+        */
 
 
+        #region Clean List
         public void limparLista()
         {
             string nomeficheiro = "produtosEmStock";
             string path = Directory.GetCurrentDirectory();
             string fileName = nomeficheiro;
 
-            if (File.Exists(fileName))
+            try
             {
-                File.WriteAllText(fileName, "");
-                Console.WriteLine("Stock Limpo");
+                if (File.Exists(fileName))
+                {
+                    File.WriteAllText(fileName, "");
+                    Console.WriteLine("Stock Limpo");
+                }
+                else
+                {
+                    Console.WriteLine(fileName);
+                    Console.WriteLine("Não encontrou stock");
+                }
             }
-            else
+            catch(Exception a)
             {
-                Console.WriteLine(fileName);
-                Console.WriteLine("Não encontrou stock");
+                Console.WriteLine("Couldn't clean list! Reason: " + a.Message);
             }
         }
+        #endregion
     }
 
 }

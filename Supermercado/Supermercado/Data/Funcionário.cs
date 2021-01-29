@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Supermercado
@@ -33,7 +34,7 @@ namespace Supermercado
             active = true;
         }
 
-        public Funcionário(string firstName, string lastName, string phoneNumber, string address, DateTime birthDate, decimal salary, string userName, string password, bool active, EnumCargo cargo)
+        public Funcionário(string firstName, string lastName, string phoneNumber, string address, DateTime birthDate, decimal salary, string userName, string password, EnumCargo cargo)
         {
             this.id = RandomID();
             this.firstName = firstName;
@@ -58,6 +59,7 @@ namespace Supermercado
         }
         #endregion
 
+        /*
         #region Listar Funcionarios
         public override string ToString()
         {
@@ -107,105 +109,170 @@ namespace Supermercado
 
 
         #endregion
+        */
 
         #region Criar Funcionario
         public void CreateEmployee()
         {
+            try
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("###########################################");
+                Console.WriteLine("#                                         #");
+                Console.WriteLine("#                REGISTAR                 #");
+                Console.WriteLine("#                                         #");
+                Console.WriteLine("###########################################");
+                Console.ResetColor();
+                Console.WriteLine("Your First Name:");
+                var firstName = Console.ReadLine();
+                while (string.IsNullOrEmpty(firstName) || firstName.Any(char.IsDigit))
+                {
+                    Console.WriteLine("Invalid name!");
+                    firstName = Console.ReadLine();
+                }
+                Console.WriteLine("Your Last Name:");
+                var lastName = Console.ReadLine();
+                while (string.IsNullOrEmpty(lastName) || lastName.Any(char.IsDigit))
+                {
+                    Console.WriteLine("Invalid name!");
+                    lastName = Console.ReadLine();
+                }
+                Console.WriteLine("Your contact information:");
+                var phoneNumber = Console.ReadLine();
+                while (string.IsNullOrEmpty(phoneNumber) || phoneNumber.Any(char.IsLetter) || phoneNumber.Length != 9)
+                {
+                    Console.WriteLine("Invalid phone number!");
+                    phoneNumber = Console.ReadLine();
+                }
+                Console.WriteLine("Your address:");
+                var address = Console.ReadLine();
+                while (string.IsNullOrEmpty(address))
+                {
+                    Console.WriteLine("Please enter your address!");
+                    address = Console.ReadLine();
+                }
+                Console.WriteLine("Your salary: ");
+                decimal salary = Convert.ToDecimal(Console.ReadLine());
+                while (salary < 600)
+                {
+                    Console.WriteLine("Don't be a liar!");
+                    salary = Convert.ToDecimal(Console.ReadLine());
+                }
+                Console.WriteLine("Your birth date: (dd/MM/YYYY)");
+                DateTime birthDate = Convert.ToDateTime(Console.ReadLine());
+                while(birthDate.Year <= 1950 || birthDate.Year >= 2006)
+                if(birthDate.Year <= 1950)
+                {
+                    Console.WriteLine("Aren't you too old to work here?");
+                    birthDate = Convert.ToDateTime(Console.ReadLine());
+                }
+                else
+                {
+                    if(birthDate.Year >= 2006)
+                    {
+                        Console.WriteLine("Aren't you too young to work here?");
+                        birthDate = Convert.ToDateTime(Console.ReadLine());
+                    }
+                }
+                Console.WriteLine("Wanted username:");
+                var username = Console.ReadLine();
+                foreach(Funcionário f in GestorFuncionário.listaFuncionarios)
+                {
+                    while (f.userName == username)
+                    {
+                        Console.WriteLine("Username already taken! Please try another one!");
+                        username = Console.ReadLine();
+                    }
+                }
+                Console.WriteLine("Wanted password(min. 8 char):");
+                var password = Console.ReadLine();
+                while (string.IsNullOrEmpty(password) || password.Length < 8)
+                {
+                    Console.WriteLine("Invalid password format! Please try another one!");
+                        password = Console.ReadLine();
+                }
+                Console.WriteLine("What's your role in the company?");
+                Console.WriteLine("1 - Gerente");
+                Console.WriteLine("2 - Repositor");
+                Console.WriteLine("3 - Caixa");
+                var cargo = Convert.ToInt32(Console.ReadLine());
+                var cargo_ = (EnumCargo)cargo;
+
+                Funcionário a = new Funcionário(firstName, lastName, phoneNumber, address, birthDate, salary, username, password, cargo_);
+                GestorFuncionário.listaFuncionarios.Add(a);
+                GestorFuncionário.GravarFuncionario();
 
 
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("###########################################");
-            Console.WriteLine("#                                         #");
-            Console.WriteLine("#                REGISTAR                 #");
-            Console.WriteLine("#                                         #");
-            Console.WriteLine("###########################################");
-            Console.ResetColor();
-            Console.WriteLine("Your First Name:");
-            var firstName = Console.ReadLine();
-            Console.WriteLine("\n Your Last Name:");
-            var lastName = Console.ReadLine();
-            Console.WriteLine("\n Your contact information:");
-            var phoneNumber = Console.ReadLine();
-            Console.WriteLine("\n Your address:");
-            var address = Console.ReadLine();
-            Console.WriteLine("\n Your salary: ");
-            decimal salary = Convert.ToDecimal(Console.ReadLine());
-            Console.WriteLine("\n Your birth date: (dd/MM/YYYY)");
-            DateTime birthDate = Convert.ToDateTime(Console.ReadLine()); 
-            Console.WriteLine("\n Wanted username:");
-            var username = Console.ReadLine();
-            Console.WriteLine("\n Wanted password(min. 8 char):");
-            var password = Console.ReadLine();
-            Console.WriteLine("\n What's your role in the company?");
-            Console.WriteLine("\n 1 - Gerente");
-            Console.WriteLine("\n 2 - Repositor");
-            Console.WriteLine("\n 3 - Caixa");
-            var cargo = Convert.ToInt32(Console.ReadLine());
-            var cargo_ = (EnumCargo)cargo;
-
-            Funcionário a = new Funcionário(firstName, lastName, phoneNumber, address, birthDate, salary, username, password,active, cargo_);
-            GestorFuncionário.listaFuncionarios.Add(a);
-            GestorFuncionário.GravarFuncionario();
-
-
-            Console.WriteLine("\nRegistado com sucesso!");
-
+                Console.WriteLine("\nUser created successfully!");
+            }
+            catch(Exception a)
+            {
+                Console.WriteLine("Error creating user! Reason: " + a.Message);
+            }
         }
         #endregion
 
         #region Login
         public static void LoginForm()
         {
+            Gerente g = new Gerente();
+            Repositor r = new Repositor();
+            Caixa c = new Caixa();
+
             bool successfull = false;
             Console.Clear();
-            while (successfull != true)
+            try
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("###########################################");
-                Console.WriteLine("#                                         #");
-                Console.WriteLine("#                   LOGIN                 #");
-                Console.WriteLine("#                                         #");
-                Console.WriteLine("###########################################");
-                Console.ForegroundColor = ConsoleColor.Blue;
-                Console.Write("Username:");
-                var username = Console.ReadLine();
-                Console.Write("Password:");
-                var password = Console.ReadLine();
-                Console.WriteLine("###########################################");
-                Console.ResetColor();
-                foreach (Funcionário funcionario in GestorFuncionário.listaFuncionarios)
+                while (successfull != true)
                 {
-                    if (username == funcionario.userName && password == funcionario.password)
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("###########################################");
+                    Console.WriteLine("#                                         #");
+                    Console.WriteLine("#                   LOGIN                 #");
+                    Console.WriteLine("#                                         #");
+                    Console.WriteLine("###########################################");
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.Write("Username:");
+                    var username = Console.ReadLine();
+                    Console.Write("Password:");
+                    var password = Console.ReadLine();
+                    Console.WriteLine("###########################################");
+                    Console.ResetColor();
+                    foreach (Funcionário funcionario in GestorFuncionário.listaFuncionarios)
                     {
-                        Console.WriteLine("Login bem sucedido!");
-                        successfull = true;
-                        Console.Clear();
-                        if (EnumHelper.GetDescription(funcionario.cargo) == "Gerente")
+                        if (username == funcionario.userName && password == funcionario.password)
                         {
-                            //MENU GERENTE
-                            Console.WriteLine("GERENTE");
+                            Console.WriteLine("Login bem sucedido!");
+                            successfull = true;
+                            Console.Clear();
+                            if (EnumHelper.GetDescription(funcionario.cargo) == "Gerente")
+                            {
+                                g.MenuGerente();
+                            }
+                            else if (EnumHelper.GetDescription(funcionario.cargo) == "Caixa")
+                            {
+                                c.MenuCaixa();
+                            }
+                            else if (EnumHelper.GetDescription(funcionario.cargo) == "Repositor")
+                            {
+                                r.MenuRepositor();
+                            }
+                            break;
                         }
-                        else if (EnumHelper.GetDescription(funcionario.cargo) == "Caixa")
+                        else
                         {
-                            //MENU CAIXA
-                            Console.WriteLine("CAIXA");
+                            Console.WriteLine("Username ou Password incorretos.");
+                            Console.Clear();
                         }
-                        else if (EnumHelper.GetDescription(funcionario.cargo) == "Repositor")
-                        {
-                            //MENU REPOSITOR
-                            Console.WriteLine("REPOSITOR");
-                        }
-                        break;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Username ou Password incorretos.");
-                        Console.Clear();
                     }
                 }
+                Console.ReadKey();
+                Console.Clear();
             }
-            Console.ReadKey();
-            Console.Clear();
+            catch(Exception a)
+            {
+                Console.WriteLine("Could not login! Reason:" + a.Message);
+            }
         }
         #endregion
 
