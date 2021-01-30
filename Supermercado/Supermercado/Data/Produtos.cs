@@ -49,7 +49,7 @@ namespace Supermercado
         #endregion
 
         #region Inserir Produto
-        public void CreateProduct()
+        public static void CreateProduct()
         {
             try
             {
@@ -96,6 +96,7 @@ namespace Supermercado
                 Console.WriteLine("3 - Enlatados");
                 var produto = Convert.ToInt32(Console.ReadLine());
                 var produto_ = (EnumProductType)produto;
+                bool active = true;
 
                 Produtos a = new Produtos(barcodeNumber, productName, unitPrice, stock, active, produto_);
                 GestorProdutos.listaProdutos.Add(a);

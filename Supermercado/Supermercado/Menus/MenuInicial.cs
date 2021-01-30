@@ -35,7 +35,6 @@ namespace Supermercado.Menus
                 Console.WriteLine("#         2 - LOGIN                            #");
                 Console.WriteLine("#                                              #");
                 Console.WriteLine("#----------------------------------------------#");
-                Console.WriteLine("3 -  LISTAR PRODUTOS (TESTE)");
                 Console.WriteLine("#                                              #");
                 Console.WriteLine("#         0 - SAIR                             #");
                 Console.WriteLine("#                                              #");
@@ -53,9 +52,6 @@ namespace Supermercado.Menus
 
                     case 2:
                         Funcionário.LoginForm();
-                        break;
-                    case 3:
-                        GestorProdutos.EscreverListaConsola();
                         break;
                     case 0:
                         Console.WriteLine("Luis & Marco Supermercado. Obrigado pela sua preferência.");

@@ -58,14 +58,13 @@ namespace Supermercado
                 switch (escolha)
                 {
                     case 1:
-                        p.CreateProduct();
+                        Produtos.CreateProduct();
                         break;
                     case 2:
-                        //Produtos.productList.Clear();
-                        limparLista();
+                        GestorProdutos.LimparLista();
                         break;
                     case 3:
-                        Console.WriteLine("Remover Produto");
+                        GestorProdutos.EscolhaRemover();
                         break;
                     case 0:
                         MenuInicial.InitialMenu();
@@ -161,32 +160,6 @@ namespace Supermercado
         */
 
 
-        #region Clean List
-        public void limparLista()
-        {
-            string nomeficheiro = "produtosEmStock";
-            string path = Directory.GetCurrentDirectory();
-            string fileName = nomeficheiro;
-
-            try
-            {
-                if (File.Exists(fileName))
-                {
-                    File.WriteAllText(fileName, "");
-                    Console.WriteLine("Stock Limpo");
-                }
-                else
-                {
-                    Console.WriteLine(fileName);
-                    Console.WriteLine("Não encontrou stock");
-                }
-            }
-            catch(Exception a)
-            {
-                Console.WriteLine("Couldn't clean list! Reason: " + a.Message);
-            }
-        }
-        #endregion
     }
 
 }

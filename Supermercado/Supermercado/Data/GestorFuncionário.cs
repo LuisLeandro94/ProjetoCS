@@ -94,6 +94,8 @@ namespace Supermercado
                     Console.Write(f.cargo);
                     Console.Write("\nActive: ");
                     Console.Write(f.active);
+                   
+                 
 
                     Console.WriteLine("\n###########################################");
                     Console.ResetColor();
@@ -109,5 +111,48 @@ namespace Supermercado
             }
         }
         #endregion
+
+        #region Remover Funcionario
+
+        public static void EscolhaRemover()
+        {
+            EscreverListaConsola();
+            Console.Write("Username do funcionário que pretende remover:");
+            string contactoAEliminarNome = Console.ReadLine();
+            bool resultado = removeFromContacs(contactoAEliminarNome);
+            if (resultado)
+            {
+                Console.WriteLine("Funcionário eliminado com sucesso");
+                GravarFuncionario();
+
+            }
+            else
+            {
+                Console.WriteLine("Falhou");
+            }
+        }
+
+        public static bool removeFromContacs(string userName)
+        {
+            int indexAremover = -1;
+            for (int i = 0; i < listaFuncionarios.Count; i++)
+            {
+
+                if (listaFuncionarios[i].userName.ToLower().Equals(userName.ToLower()))
+                {
+                    indexAremover = i;
+                }
+            }
+            if (indexAremover != -1)
+            {
+                listaFuncionarios.RemoveAt(indexAremover);
+                return true;
+            }
+
+            return false;
+        }
+
+        #endregion
+
     }
 }

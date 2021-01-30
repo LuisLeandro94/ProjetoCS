@@ -59,7 +59,10 @@ namespace Supermercado
                         f.CreateEmployee();
                         break;
                     case 2:
-                        //removeFromeEmployeeList();
+                        GestorFuncionário.EscolhaRemover();
+                        break;
+                    case 3:
+                        Console.WriteLine("Vender Produtos");
                         break;
                     case 0:
                         MenuInicial.InitialMenu();
