@@ -106,38 +106,112 @@ namespace Supermercado
         public static void EscolhaEditar()
         {
             GestorProdutos.EscreverListaConsola();
-            Console.WriteLine("Cliente: ");
+            Console.Write("Cliente: ");
             string nomeCliente = Console.ReadLine();
 
-            Console.WriteLine("Produto para compra: ");
-            string produtocompra = Console.ReadLine();
+            Console.Write("\nBarcode do produto a comprar: ");
+            string barcodecompra = Console.ReadLine();
 
-            Console.Write("Quantidade a comprar: ");
+            Console.Write("\nQuantidade a comprar: ");
             double quantidade = Convert.ToDouble(Console.ReadLine());
 
 
 
-            EditaaContact(nomeCliente, produtocompra, quantidade);
+            EditaaContact(nomeCliente, barcodecompra, quantidade);
             //GravarProduto();
-            int indexAremover;
-            double valor;
-            for (int i = 0; i < GestorProdutos.listaProdutos.Count; i++)
-            {
-
-                if (GestorProdutos.listaProdutos[i].productName.ToLower().Equals(produtocompra.ToLower()))
-                {
-                    indexAremover = i;
-                    valor = Convert.ToDouble(GestorProdutos.listaProdutos[i].unitPrice) * quantidade;
-                    Console.WriteLine("------------FATURA------------");
-                    Console.WriteLine("Compra: {0} * Quantidade: {1} ", produtocompra, quantidade);
-                    Console.WriteLine("Valor da compra: {0}",valor);
-                }
             
-            }
-            Console.WriteLine("Pagamento: ");
+            double valor;
 
-            //A CONTINUAR
+            foreach (Produtos p in GestorProdutos.listaProdutos)
+            {
+                if (p.barcodeNumber.ToLower().Equals(barcodecompra.ToLower()))              
+                    {
            
+                    if (p.stock <= 0)
+                    {                  
+                        Console.WriteLine("Não há stock suficiente para a venda!");
+                    }
+                    else
+                    {
+                        valor = Convert.ToDouble(p.unitPrice) * quantidade;
+                        Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("###########################################");
+                        Console.WriteLine("#                                         #");
+                        Console.WriteLine("#                 COMPRA                  #");
+                        Console.WriteLine("#                                         #");
+                        Console.WriteLine("###########################################");
+                        Console.ResetColor();
+                        Console.WriteLine("Compra: {0} ", barcodecompra);
+                        Console.WriteLine("Quantidade: {0} ", quantidade);
+                        Console.WriteLine("Valor da compra: {0} \u00A9 ", valor);
+                        Console.WriteLine("\nPagamento: ");
+                        double pagamento = Convert.ToDouble(Console.ReadLine());
+
+                        do
+                        {
+                            Console.WriteLine("Está em falta: {0}", valor - pagamento);
+                            Console.WriteLine("Receber mais dinheiro: ");
+                            double novopagamento = Convert.ToDouble(Console.ReadLine());
+                            pagamento = pagamento + novopagamento;
+                        } while (pagamento < valor);
+
+
+
+
+                        if (pagamento > valor)
+                        {
+                            Console.WriteLine("Troco: {0}", pagamento - valor);
+                        }
+                        int nif;
+                        Console.Write("\nDeseja número de contribuinte?");
+                        Console.Write("\n1 - SIM");
+                        Console.WriteLine("\n2 - NÃO");
+                        int op = Convert.ToInt32(Console.ReadLine());
+                        if (op == 1)
+                        {
+                            Console.WriteLine("Número de contribuinte: ");
+                            nif = Convert.ToInt32(Console.ReadLine());
+                        }
+                        else
+                        {
+                            nif = 000000000;
+                        }
+                        GestorProdutos.GravarProduto();
+                        Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("###########################################");
+                        Console.WriteLine("#                                         #");
+                        Console.WriteLine("#           DADOS DA COMPRA               #");
+                        Console.WriteLine("#                                         #");
+                        Console.WriteLine("###########################################");
+                        Console.ResetColor();
+                        Console.Write("Cliente: ");
+                        Console.Write(nomeCliente);
+                        Console.Write("\nBarcode Produto Compra: ");
+                        Console.Write(barcodecompra);
+                        Console.Write("\nQuantidade: ");
+                        Console.Write(quantidade);
+                        Console.Write("\nValor da Compra: ");
+                        Console.Write(valor);
+                        Console.Write("\nNúmero de Contribuinte: ");
+                        Console.Write(nif);
+                        Caixa d = new Caixa(nomeCliente, barcodecompra, quantidade, valor, nif);
+                        
+                        GestorProdutos.listaProdutos.Add(d);
+                        GestorProdutos.GravarProduto();
+                    }
+
+
+
+                }
+            }
+
+                   
+
+
+            
+
 
         }
         static public Produtos EditaaContact(string nomeCliente, string nome, double novoStock)
