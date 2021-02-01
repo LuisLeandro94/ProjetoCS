@@ -8,7 +8,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Supermercado
 {
-    public class Repositor : Funcionário
+    public class Repositor : Funcionario
     {
         public Repositor() : base()
         {
@@ -19,9 +19,6 @@ namespace Supermercado
         public void MenuRepositor()
         {
             GestorProdutos.LerProduto();
-
-            Produtos p = new Produtos();
-            Funcionário f = new Funcionário();
 
             int escolha = 0;
             while (escolha != 7)
@@ -47,6 +44,10 @@ namespace Supermercado
                 Console.WriteLine("#                                                  #");
                 Console.WriteLine("#--------------------------------------------------#");
                 Console.WriteLine("#                                                  #");
+                Console.WriteLine("#         4 - LISTAR PRODUTOS                      #");
+                Console.WriteLine("#                                                  #");
+                Console.WriteLine("#--------------------------------------------------#");
+                Console.WriteLine("#                                                  #");
                 Console.WriteLine("#         0 - SAIR                                 #");
                 Console.WriteLine("#                                                  #");
                 Console.WriteLine("####################################################");
@@ -66,6 +67,9 @@ namespace Supermercado
                     case 3:
                         GestorProdutos.EscolhaRemover();
                         break;
+                    case 4:
+                        GestorProdutos.EscreverListaConsola();
+                        break;
                     case 0:
                         MenuInicial.InitialMenu();
                         break;
@@ -78,90 +82,7 @@ namespace Supermercado
             }
         }
         #endregion
-
-        /*
-        #region Criar um Produto
-        public void SaveProduct()
-        {
-            int op;
-            
-            do
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("|-----------------------------------------|");
-                Console.WriteLine("|                Adicionar Produto        |");
-                Console.WriteLine("|-----------------------------------------|");
-                Console.ResetColor();
-
-                Random rnd = new Random();
-                int id = rnd.Next(1, 1000);
-
-                Console.WriteLine("Nome Produto:");
-                
-                ConsoleKeyInfo key;
-                string productName = "";
-                do
-                {
-                   
-                    key = Console.ReadKey(true);
-
-                    if (key.Key != ConsoleKey.Backspace)
-                    {
-                        productName += key.KeyChar;
-                        Console.Write("*");
-                    }
-                    else
-                    {
-                        Console.Write("\b");
-                    }
-                } while (key.Key != ConsoleKey.Enter);
-                Console.WriteLine("\nThe Password You entered is : " + productName);
-                var nome = productName;
-
-                Console.WriteLine("\nCódigo de Barras");
-                var codigoBarras = Console.ReadLine();
-                Console.WriteLine("\nPreço unitário: ");
-                var unitPrice = Console.ReadLine();
-                Console.WriteLine("\nStock");
-                double stock = Convert.ToDouble(Console.ReadLine());
-                bool active = true;
-
-                Produtos.productList.Add(new Produtos(id, nome,codigoBarras,  unitPrice, stock, active));
-
-                Console.WriteLine("Registado com sucesso!");
-
-                //Validação
-
-                string nomeficheiro = "produtosEmStock";
-                string path = Directory.GetCurrentDirectory();
-                string fileName = "/" + nomeficheiro + ".txt";
-
-                StreamWriter streamWriter = File.AppendText(nomeficheiro);
-
-                foreach (Produtos item in Produtos.productList)
-                {
-                    streamWriter.Write(item.id + " | " + item.productName + " | " + item.barcodeNumber  + " | " + item.unitPrice + " | " + item.stock + " | " + item.active + "\n");
-                    ;
-                }
-                streamWriter.Close();
-
-
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("\nDeseja adicionar mais produtos?");
-                Console.WriteLine("\n1- Sim");
-                Console.WriteLine("2- Não");
-                Console.ResetColor();
-                op = Convert.ToInt32(Console.ReadLine());
-            } while (op !=2 );
-
-
-        }
-        #endregion
-        */
-
-
     }
-
 }
         
 

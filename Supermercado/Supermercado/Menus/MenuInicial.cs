@@ -9,12 +9,8 @@ namespace Supermercado.Menus
     {
         public static void InitialMenu()
         {
-            GestorFuncionário.LerFuncionario();
+            GestorFuncionario.LerFuncionario();
             GestorProdutos.LerProduto();
-
-            Produtos p = new Produtos();
-            Funcionário f = new Funcionário();
-
             int escolha = -1;
 
             while (escolha != 0)
@@ -47,14 +43,15 @@ namespace Supermercado.Menus
                 switch (escolha)
                 {
                     case 1:
-                        GestorFuncionário.EscreverListaConsola();
+                        GestorFuncionario.EscreverListaConsola();
                         break;
 
                     case 2:
-                        Funcionário.LoginForm();
+                        Funcionario.LoginForm();
                         break;
                     case 0:
                         Console.WriteLine("Luis & Marco Supermercado. Obrigado pela sua preferência.");
+                        Environment.Exit(0);
                         break;
                     default:
                         Console.WriteLine("Opção Inválida");

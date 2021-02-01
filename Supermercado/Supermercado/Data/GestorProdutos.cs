@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Supermercado.Enums;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -11,20 +13,20 @@ namespace Supermercado.Data
     class GestorProdutos
     {
         static public List<Produtos> listaProdutos = new List<Produtos>();
+        static public string path = ConfigurationManager.AppSettings["produtosPath"];
 
         #region Gravar Produto
         public static void GravarProduto()
         {
             string fileLocation = Directory.GetCurrentDirectory();
-            string fileName = "listaDeProdutos.txt";
 
             try
             {
-                FileStream fileStream = File.Create(fileName);
-                BinaryFormatter f = new BinaryFormatter();
-
-                f.Serialize(fileStream, GestorProdutos.listaProdutos);
-                fileStream.Close();
+                using(FileStream fileStream = File.Create(path))
+                {
+                    BinaryFormatter f = new BinaryFormatter();
+                    f.Serialize(fileStream, GestorProdutos.listaProdutos);
+                }
             }
             catch(Exception a)
             {
@@ -37,21 +39,20 @@ namespace Supermercado.Data
         public static void LerProduto()
         {
             string location = Directory.GetCurrentDirectory();
-            string filename = "listaDeProdutos.txt";
 
             try
             {
                 GestorProdutos.listaProdutos.Clear();
-                if (File.Exists(filename))
+                if (File.Exists(path))
                 {
-                    FileStream fileStream = File.OpenRead(filename);
-                    BinaryFormatter f = new BinaryFormatter();
+                    using(FileStream fileStream = File.OpenRead(path))
+                    {
+                        BinaryFormatter f = new BinaryFormatter();
 
 
-                    List<Produtos> g = f.Deserialize(fileStream) as List<Produtos>;
-                    GestorProdutos.listaProdutos = g;
-
-                    fileStream.Close();
+                        List<Produtos> g = f.Deserialize(fileStream) as List<Produtos>;
+                        GestorProdutos.listaProdutos = g;
+                    }
                 }
             }
             catch(Exception a)
@@ -64,45 +65,50 @@ namespace Supermercado.Data
         #region Listar na Console
         public static void EscreverListaConsola()
         {
-            string result = "";
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("###########################################");
-            Console.WriteLine("#                                         #");
-            Console.WriteLine("#           LISTA DE PRODUTOS             #");
-            Console.WriteLine("#                                         #");
-            Console.WriteLine("###########################################");
-            Console.ResetColor();
-
             try
             {
+                List<string> lista = new List<string>();
+                string row = "ID|NOME PRODUTO|BARCODE|PREÇO|STOCK|TIPO";
+                lista.Add(row);
+                int size = 0;
                 foreach (Produtos p in GestorProdutos.listaProdutos)
                 {
-                    Console.Write("ID: ");
-                    Console.Write(p.id);
-                    Console.Write("\nBarcode Number: ");
-                    Console.Write(p.barcodeNumber);
-                    Console.Write("\nProduct Name: ");
-                    Console.Write(p.productName);
-                    Console.Write("\nUnit Price: ");
-                    Console.Write(p.unitPrice);
-                    Console.Write("\nStock: ");
-                    Console.Write(p.stock);
-                    Console.Write("\nProduct: ");
-                    Console.Write(p.produto);
-                    //Mostrar Apenas Os que estão ativos??
-                    if (p.active == true)
+                    if(p.stock >= 0)
                     {
-                        Console.WriteLine("\nActive");
-                        Console.Write(p.active);
+                        if(EnumHelper.GetDescription(p.produto) == "Congelados")
+                        {
+                            row = $"{p.id}|{p.productName}|{p.barcodeNumber}|{p.unitPrice}|{p.stock}|{p.produto}";
+                            if (row.Length > size)
+                            {
+                                size = row.Length;
+                            }
+                            lista.Add(row);
+                        }
+                        else
+                        {
+                            if(EnumHelper.GetDescription(p.produto) == "Enlatados")
+                            {
+                                row = $"{p.id}|{p.productName}|{p.barcodeNumber}|{p.unitPrice}|{p.stock}|{p.produto}";
+                                if (row.Length > size)
+                                {
+                                    size = row.Length;
+                                }
+                                lista.Add(row);
+                            }
+                            else
+                            {
+                                if(EnumHelper.GetDescription(p.produto) == "Prateleira")
+                                {
+                                    row = $"{p.id}|{p.productName}|{p.barcodeNumber}|{p.unitPrice}|{p.stock}|{p.produto}";
+                                    if (row.Length > size)
+                                    {
+                                        size = row.Length;
+                                    }
+                                    lista.Add(row);
+                                }
+                            }
+                        }
                     }
-                   
-                    
-                    Console.WriteLine("\n###########################################");
-                    Console.ResetColor();
-
-
-                    Console.WriteLine();
-                    result += "";
                 }
             }
             catch (Exception a)
@@ -116,39 +122,53 @@ namespace Supermercado.Data
 
         public static void EscolhaRemover()
         {
-            EscreverListaConsola();
-            Console.Write("Product Name do produto que pretende remover:");
-            string contactoAEliminarNome = Console.ReadLine();
-            bool resultado = removeFromContacs(contactoAEliminarNome);
-            if (resultado)
+            try
             {
-                Console.WriteLine("Produto eliminado com sucesso");
-                GravarProduto();
+                EscreverListaConsola();
+                Console.Write("Product Name do produto que pretende remover:");
+                string contactoAEliminarNome = Console.ReadLine();
+                bool resultado = removeFromProducts(contactoAEliminarNome);
+                if (resultado)
+                {
+                    Console.WriteLine("Produto eliminado com sucesso");
+                    GravarProduto();
 
+                }
+                else
+                {
+                    Console.WriteLine("Falhou");
+                }
             }
-            else
+            catch(Exception a)
             {
-                Console.WriteLine("Falhou");
+                Console.WriteLine("Couldn't eliminate product. Reason: " + a.Message);
             }
         }
 
-        public static bool removeFromContacs(string productName)
+        public static bool removeFromProducts(string productName)
         {
-            int indexAremover = -1;
-            for (int i = 0; i < listaProdutos.Count; i++)
+            try
             {
-                
-                if (listaProdutos[i].productName.ToLower().Equals(productName.ToLower()))
+                int indexAremover = -1;
+                for (int i = 0; i < listaProdutos.Count; i++)
                 {
-                    indexAremover = i;
-                }
-            }
-            if (indexAremover != -1)
-            {
-                listaProdutos.RemoveAt(indexAremover);
-                return true;
-            }
 
+                    if (listaProdutos[i].productName.ToLower().Equals(productName.ToLower()))
+                    {
+                        indexAremover = i;
+                    }
+                }
+                if (indexAremover != -1)
+                {
+                    listaProdutos.RemoveAt(indexAremover);
+                    return true;
+                }
+                return false;
+            }
+            catch(Exception a)
+            {
+                Console.WriteLine("Couldn't remove product. Reason: " + a.Message);
+            }
             return false;
         }
 
@@ -157,91 +177,108 @@ namespace Supermercado.Data
         #region Editar Produto 
         public static void EscolhaEditar()
         {
-            Console.WriteLine("Nome do Produto a Editar:");
-            string nomeAProcurar = Console.ReadLine();
-           
-            Console.Write("Nome Produto: ");
-            string novoProductName = Console.ReadLine();
-            Console.Write("Barcode Produto: ");
-            string novoBarcode = Console.ReadLine();
-            Console.Write("Unit Price: ");
-            string novoUnitPrice = Console.ReadLine();
-            Console.Write("Stock: ");
-            double novoStock = Convert.ToDouble(Console.ReadLine());
-
-            
-
-            EditaContact(nomeAProcurar, novoProductName, novoBarcode, novoUnitPrice, novoStock);
-            GravarProduto();
-
-
-        }
-        static public Produtos EditaContact(string nome, string novoProductName, string novoBarcode, string novoUnitPrice, double novoStock)
-        {
-
-
-            Produtos contactoAEditar = FindContact(nome);
-
-            if (contactoAEditar != null)
+            try
             {
-                if (!novoProductName.Equals(""))
-                {
-                    contactoAEditar.productName = novoProductName;
-                }
-                if (!novoBarcode.Equals(""))
-                {
-                    contactoAEditar.barcodeNumber = novoBarcode;
-                }
-                if (!novoUnitPrice.Equals(""))
-                {
-                    contactoAEditar.unitPrice = novoUnitPrice;
-                }
-                if (!novoStock.Equals(""))
-                {
-                    contactoAEditar.stock = novoStock;
-                }
+                Console.WriteLine("Nome do Produto a Editar:");
+                string nomeAProcurar = Console.ReadLine();
 
-                return contactoAEditar;
+                Console.Write("Nome Produto: ");
+                string novoProductName = Console.ReadLine();
+                Console.Write("Barcode Produto: ");
+                string novoBarcode = Console.ReadLine();
+                Console.Write("Unit Price: ");
+                string novoUnitPrice = Console.ReadLine();
+                Console.Write("Stock: ");
+                double novoStock = Convert.ToDouble(Console.ReadLine());
 
+                EditProduct(nomeAProcurar, novoProductName, novoBarcode, novoUnitPrice, novoStock);
+                GravarProduto();
             }
+            catch(Exception a)
+            {
+                Console.WriteLine("Couldn't edit Product. Reason: " + a.Message);
+            }
+        }
+        #region Edit Product
+        static public Produtos EditProduct(string nome, string novoProductName, string novoBarcode, string novoUnitPrice, double novoStock)
+        {
+            try
+            {
+                Produtos contactoAEditar = FindProduct(nome);
 
+                if (contactoAEditar != null)
+                {
+                    if (!novoProductName.Equals(""))
+                    {
+                        contactoAEditar.productName = novoProductName;
+                    }
+                    if (!novoBarcode.Equals(""))
+                    {
+                        contactoAEditar.barcodeNumber = novoBarcode;
+                    }
+                    if (!novoUnitPrice.Equals(""))
+                    {
+                        contactoAEditar.unitPrice = novoUnitPrice;
+                    }
+                    if (!novoStock.Equals(""))
+                    {
+                        contactoAEditar.stock = novoStock;
+                    }
+                    return contactoAEditar;
+                }
+                return null;
+            }
+            catch(Exception a)
+            {
+                Console.WriteLine("Couldn't edit product. Reason: " + a.Message);
+            }
             return null;
         }
+        #endregion
 
-        
-        static public Produtos FindContact(string productName)
+        #region Find Product
+        static public Produtos FindProduct(string productName)
         {
-            foreach (Produtos p in listaProdutos)
+            try
             {
-                if (p.productName.ToLower().Equals(productName.ToLower()))
+                foreach (Produtos p in listaProdutos)
                 {
-                    
-                    return p;
+                    if (p.productName.ToLower().Equals(productName.ToLower()))
+                    {
+
+                        return p;
+                    }
                 }
+                return null;
             }
-
+            catch(Exception a)
+            {
+                Console.WriteLine("Couldn't find product! Reason: " + a.Message);
+            }
             return null;
-
-
         }
-
+        #endregion
 
         #endregion
 
         #region Limpar Stock
         public static void LimparLista()
         {
-            listaProdutos.Clear();
-            string location = Directory.GetCurrentDirectory();
-            string fileName = "listaDeProdutos.txt";
+            try
+            {
+                listaProdutos.Clear();
+                string location = Directory.GetCurrentDirectory();
 
-            if (File.Exists(fileName))
-            {     
-                File.Delete(fileName);
+                if (File.Exists(path))
+                {
+                    File.WriteAllText(path, string.Empty);
 
+                }
             }
-
-
+            catch(Exception a)
+            {
+                Console.WriteLine("Couldn't clear the list! Reason: " + a.Message);
+            }
         }
         #endregion
 

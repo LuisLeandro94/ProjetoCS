@@ -1,4 +1,5 @@
-﻿using Supermercado.Menus;
+﻿using Supermercado.Data;
+using Supermercado.Menus;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,7 +10,7 @@ namespace Supermercado
 {
     [Serializable]
 
-    public class Gerente : Funcionário
+    public class Gerente : Funcionario
     {
         
         public Gerente() : base()
@@ -17,10 +18,8 @@ namespace Supermercado
         }
 
         #region Menu Gerente
-        public void MenuGerente()
+        public void MenuGerente(Funcionario funcionario)
         {
-            Funcionário f = new Funcionário();
-            Repositor r = new Repositor();
             int escolha = 0;
             while (escolha != 7)
             {
@@ -45,6 +44,10 @@ namespace Supermercado
                 Console.WriteLine("#                                                #");
                 Console.WriteLine("#------------------------------------------------#");
                 Console.WriteLine("#                                                #");
+                Console.WriteLine("#         4 - LISTAR FATURAS                     #");
+                Console.WriteLine("#                                                #");
+                Console.WriteLine("#------------------------------------------------#");
+                Console.WriteLine("#                                                #");
                 Console.WriteLine("#         0 - SAIR                               #");
                 Console.WriteLine("#                                                #");
                 Console.WriteLine("##################################################");
@@ -56,13 +59,16 @@ namespace Supermercado
                 switch (escolha)
                 {
                     case 1:
-                        f.CreateEmployee();
+                        funcionario.CreateEmployee();
                         break;
                     case 2:
-                        GestorFuncionário.EscolhaRemover();
+                        GestorFuncionario.EscolhaRemover();
                         break;
                     case 3:
-                        Console.WriteLine("Vender Produtos");
+                        Vendas.Venda(funcionario);
+                        break;
+                    case 4:
+                        GestorFaturas.ListarFaturasConsole();
                         break;
                     case 0:
                         MenuInicial.InitialMenu();
@@ -84,7 +90,7 @@ namespace Supermercado
             string result ="ID" + "   " + "Nome" + "          " + "UserName " + "      " + "PassWord" + "\n";
             try
             {
-                foreach (Funcionário f in GestorFuncionário.listaFuncionarios)
+                foreach (Funcionario f in GestorFuncionario.listaFuncionarios)
                 {
                     result += i++ + f.firstName + " " + f.lastName + "     " + f.userName + "         " + f.password + " \n";
                 }
@@ -103,16 +109,16 @@ namespace Supermercado
             int indexAremover = -1;
             try
             {
-                for (int i = 0; i < GestorFuncionário.listaFuncionarios.Count; i++)
+                for (int i = 0; i < GestorFuncionario.listaFuncionarios.Count; i++)
                 {
-                    if (GestorFuncionário.listaFuncionarios[i].userName.ToLower().Equals(nome.ToLower()))
+                    if (GestorFuncionario.listaFuncionarios[i].userName.ToLower().Equals(nome.ToLower()))
                     {
                         indexAremover = i;
                     }
                 }
                 if (indexAremover != -1)
                 {
-                    GestorFuncionário.listaFuncionarios.RemoveAt(indexAremover);
+                    GestorFuncionario.listaFuncionarios.RemoveAt(indexAremover);
                     return true;
                 }
             }
@@ -124,27 +130,5 @@ namespace Supermercado
         }
         #endregion
 
-        /*
-         * int remover = 0;
-                        Console.WriteLine(ToString());
-                        Console.WriteLine("ID A REMOVER: ");
-                        remover = int.Parse(Console.ReadLine());
-
-                        GestorFuncionário.listaFuncionarios.RemoveAt(remover);
-
-                        //CÓDIGO REMOVER NÃO ESTÁ A FUNCIONAR MAS TEM A FORMA ANTERIOR
-
-                        /* string contactoAEliminarNome = Console.ReadLine();
-                         Console.WriteLine(contactoAEliminarNome);
-                         bool resultado = removeFromeEmployeeList(contactoAEliminarNome);
-                         if (resultado)
-                         {
-                             Console.WriteLine("Eliminado com sucesso");
-                         }
-                         else
-                         {
-                             Console.WriteLine("Falhou");
-                         }
-                         Console.WriteLine("Clique Enter para voltar ao menu principal");*/
     }
 }

@@ -9,7 +9,7 @@ namespace Supermercado
 {
     [Serializable]
 
-    public class Funcionário
+    public class Funcionario
     {
         #region Properties
         public int id { get; set; }
@@ -29,12 +29,12 @@ namespace Supermercado
         static public List<Repositor> repositorList = new List<Repositor>();
 
         #region Constructors
-        public Funcionário()
+        public Funcionario()
         {
             active = true;
         }
 
-        public Funcionário(string firstName, string lastName, string phoneNumber, string address, DateTime birthDate, decimal salary, string userName, string password, EnumCargo cargo)
+        public Funcionario(string firstName, string lastName, string phoneNumber, string address, DateTime birthDate, decimal salary, string userName, string password, EnumCargo cargo)
         {
             this.id = RandomID();
             this.firstName = firstName;
@@ -59,57 +59,10 @@ namespace Supermercado
         }
         #endregion
 
-        /*
-        #region Listar Funcionarios
         public override string ToString()
         {
-            string result = "";
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("###########################################");
-            Console.WriteLine("#                                         #");
-            Console.WriteLine("#           LISTA DE FUNCIONARIOS         #");
-            Console.WriteLine("#                                         #");
-            Console.WriteLine("###########################################");
-            Console.ResetColor();
-
-            foreach (Funcionário f in GestorFuncionário.listaFuncionarios)
-            {
-
-                Console.Write("Nome: ");
-                Console.WriteLine(f.firstName);
-                Console.Write("LastName: ");
-                Console.Write(f.lastName);
-                Console.Write("\nPhoneNumber: ");
-                Console.Write(f.phoneNumber);
-                Console.Write("\nAddress: ");
-                Console.Write(f.address);
-                Console.Write("\nSalary: ");
-                Console.Write(f.salary);
-                Console.Write("\nBirth Date: ");
-                Console.Write(f.birthDate.ToString("dd / MM / yyyy"));
-                Console.Write("\nUserName: ");
-                Console.Write(f.userName);
-                Console.Write("\nPassword: ");
-                Console.Write(f.password);
-                Console.Write("\nCargo: ");
-                Console.Write(f.cargo);
-                Console.Write("\nActive: ");
-                Console.Write(f.active);
-
-                Console.WriteLine("\n###########################################");
-                Console.ResetColor();
-
-
-                Console.WriteLine();
-                result += "";
-
-            }
-            return result;
+            return firstName + " " + lastName;
         }
-
-
-        #endregion
-        */
 
         #region Criar Funcionario
         public void CreateEmployee()
@@ -185,7 +138,7 @@ namespace Supermercado
                 }
                 Console.WriteLine("Wanted username:");
                 var username = Console.ReadLine();
-                foreach(Funcionário f in GestorFuncionário.listaFuncionarios)
+                foreach(Funcionario f in GestorFuncionario.listaFuncionarios)
                 {
                     while (f.userName == username)
                     {
@@ -194,7 +147,7 @@ namespace Supermercado
                     }
                 }
                 Console.WriteLine("Wanted password(min. 8 char):");
-                var password = Console.ReadLine();
+                var password = ReadPassword();
                 while (string.IsNullOrEmpty(password) || password.Length < 8)
                 {
                     Console.WriteLine("Invalid password format! Please try another one!");
@@ -207,9 +160,9 @@ namespace Supermercado
                 var cargo = Convert.ToInt32(Console.ReadLine());
                 var cargo_ = (EnumCargo)cargo;
 
-                Funcionário a = new Funcionário(firstName, lastName, phoneNumber, address, birthDate, salary, username, password, cargo_);
-                GestorFuncionário.listaFuncionarios.Add(a);
-                GestorFuncionário.GravarFuncionario();
+                Funcionario a = new Funcionario(firstName, lastName, phoneNumber, address, birthDate, salary, username, password, cargo_);
+                GestorFuncionario.listaFuncionarios.Add(a);
+                GestorFuncionario.GravarFuncionario();
 
 
                 Console.WriteLine("\nUser created successfully!");
@@ -244,10 +197,10 @@ namespace Supermercado
                     Console.Write("Username:");
                     var username = Console.ReadLine();
                     Console.Write("Password:");
-                    var password = Console.ReadLine();
+                    var password = ReadPassword();
                     Console.WriteLine("###########################################");
                     Console.ResetColor();
-                    foreach (Funcionário funcionario in GestorFuncionário.listaFuncionarios)
+                    foreach (Funcionario funcionario in GestorFuncionario.listaFuncionarios)
                     {
                         if (username == funcionario.userName && password == funcionario.password)
                         {
@@ -256,11 +209,11 @@ namespace Supermercado
                             Console.Clear();
                             if (EnumHelper.GetDescription(funcionario.cargo) == "Gerente")
                             {
-                                g.MenuGerente();
+                                g.MenuGerente(funcionario);
                             }
                             else if (EnumHelper.GetDescription(funcionario.cargo) == "Caixa")
                             {
-                                c.MenuCaixa();
+                                c.MenuCaixa(funcionario);
                             }
                             else if (EnumHelper.GetDescription(funcionario.cargo) == "Repositor")
                             {
@@ -285,6 +238,41 @@ namespace Supermercado
         }
         #endregion
 
+        #region Password
+        public static string ReadPassword()
+        {
+            string password = "";
+            ConsoleKeyInfo info = Console.ReadKey(true);
+            while (info.Key != ConsoleKey.Enter)
+            {
+                if (info.Key != ConsoleKey.Backspace)
+                {
+                    Console.Write("*");
+                    password += info.KeyChar;
+                }
+                else if (info.Key == ConsoleKey.Backspace)
+                {
+                    if (!string.IsNullOrEmpty(password))
+                    {
+                        // Remove um caractere da password, becz backspace
+                        password = password.Substring(0, password.Length - 1);
+                        // Vê a localizaçao do cursor
+                        int pos = Console.CursorLeft;
+                        // Move o cursor 1 espaço pra esquerda
+                        Console.SetCursorPosition(pos - 1, Console.CursorTop);
+                        // Altera por um espaço
+                        Console.Write(" ");
+                        // Move o cursor 1 espaço pra esquerda
+                        Console.SetCursorPosition(pos - 1, Console.CursorTop);
+                    }
+                }
+                info = Console.ReadKey(true);
+            }
+            // Adiciona uma nova linha por causa do enter
+            Console.WriteLine();
+            return password;
+        }
+        #endregion
     }
 }
 

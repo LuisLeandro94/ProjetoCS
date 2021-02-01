@@ -1,8 +1,18 @@
 {
   "version": 2,
-  "dgSpecHash": "xE8IogVOhgoTQrsm7E1PSq3pMi369Od9AEdo28YOxnsUD+TtqIaUewr80XD+0j+3hcf+y0gTNjVI5duRvBlH5w==",
+  "dgSpecHash": "x4HCpdiaJfzrVpJN1v8zTSqNfBXrN4P3jVYknbB46noZ6cRbnBEeyao1gLF2ZhSJSgLYVT4TlfuWEVpK9grahA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\ferma\\Dropbox\\My PC (LAPTOP-OQG2DRPV)\\Desktop\\ProjetoCS\\Supermercado\\Supermercado\\Supermercado.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\Luis Ribeiro\\Desktop\\ProjetoCS\\Supermercado\\Supermercado\\Supermercado.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Luis Ribeiro\\.nuget\\packages\\microsoft.netcore.platforms\\5.0.0\\microsoft.netcore.platforms.5.0.0.nupkg.sha512",
+    "C:\\Users\\Luis Ribeiro\\.nuget\\packages\\microsoft.win32.systemevents\\5.0.0\\microsoft.win32.systemevents.5.0.0.nupkg.sha512",
+    "C:\\Users\\Luis Ribeiro\\.nuget\\packages\\system.configuration.configurationmanager\\5.0.0\\system.configuration.configurationmanager.5.0.0.nupkg.sha512",
+    "C:\\Users\\Luis Ribeiro\\.nuget\\packages\\system.drawing.common\\5.0.0\\system.drawing.common.5.0.0.nupkg.sha512",
+    "C:\\Users\\Luis Ribeiro\\.nuget\\packages\\system.security.accesscontrol\\5.0.0\\system.security.accesscontrol.5.0.0.nupkg.sha512",
+    "C:\\Users\\Luis Ribeiro\\.nuget\\packages\\system.security.cryptography.protecteddata\\5.0.0\\system.security.cryptography.protecteddata.5.0.0.nupkg.sha512",
+    "C:\\Users\\Luis Ribeiro\\.nuget\\packages\\system.security.permissions\\5.0.0\\system.security.permissions.5.0.0.nupkg.sha512",
+    "C:\\Users\\Luis Ribeiro\\.nuget\\packages\\system.security.principal.windows\\5.0.0\\system.security.principal.windows.5.0.0.nupkg.sha512",
+    "C:\\Users\\Luis Ribeiro\\.nuget\\packages\\system.windows.extensions\\5.0.0\\system.windows.extensions.5.0.0.nupkg.sha512"
+  ],
   "logs": []
 }

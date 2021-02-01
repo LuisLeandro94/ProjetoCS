@@ -1,6 +1,7 @@
 ﻿using Supermercado.Data;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -30,6 +31,7 @@ namespace Supermercado
         #endregion
 
         static public List<Produtos> productList = new List<Produtos>();
+        static public string path = ConfigurationManager.AppSettings["produtosPath"];
 
         #region Constructors
         public Produtos()
@@ -116,27 +118,24 @@ namespace Supermercado
         #region Ler Produtos
         public void ListProduct()
         {
-            string fileName = "produtosEmStock.txt";
-
-            //Validação
             try
             { 
-            if(File.Exists(fileName))
-            {
-                FileStream fileStream = File.OpenRead(fileName);
-                BinaryFormatter binaryFormatter = new BinaryFormatter();
-
-                while (fileStream.Position > fileStream.Length)
+                if(File.Exists(path))
                 {
-                    Produtos productToBeListed = binaryFormatter.Deserialize(fileStream) as Produtos;
-                    productList.Add(productToBeListed);
+                    FileStream fileStream = File.OpenRead(path);
+                    BinaryFormatter binaryFormatter = new BinaryFormatter();
+
+                    while (fileStream.Position > fileStream.Length)
+                    {
+                        Produtos productToBeListed = binaryFormatter.Deserialize(fileStream) as Produtos;
+                        productList.Add(productToBeListed);
+                    }
+                    fileStream.Close();
                 }
-                fileStream.Close();
-            }
-            else
-            {
-                Console.WriteLine("Este ficheiro não existe para leitura!");
-            }
+                else
+                {
+                    Console.WriteLine("Este ficheiro não existe para leitura!");
+                }
             }
             catch(Exception a)
             {
