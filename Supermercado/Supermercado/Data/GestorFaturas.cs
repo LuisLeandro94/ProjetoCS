@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 
@@ -60,38 +61,23 @@ namespace Supermercado.Data
         public static void ListarFaturasConsole()
         {
             LerFaturas();
-            string result = "";
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("###########################################");
-            Console.WriteLine("#                                         #");
-            Console.WriteLine("#            LISTA DE FATURAS             #");
-            Console.WriteLine("#                                         #");
-            Console.WriteLine("###########################################");
-            Console.ResetColor();
-
             try
             {
-                foreach (Fatura p in GestorFaturas.listaFaturas)
+                int size = 0;
+                int option = -1;
+                Console.WriteLine("Deseja ordenar as faturas? (1) - Sim | (0) - Não");
+                option = Convert.ToInt32(Console.ReadLine());
+                string row = "NOME FUNCIONARIO|NOME CLIENTE|NIF CLIENTE|NOME PRODUTO|BARCODE|PREÇO UNITÁRIO|QUANTIDADE";
+                List<string> lista = new List<string>();
+                lista.Add(row);
+                List<Fatura> listAux = option == 1 ? GestorFaturas.listaFaturas.OrderBy(x => x.listaVendas.Sum(y => Convert.ToDouble(y.unitPrice) * y.quantity)).ToList() : GestorFaturas.listaFaturas.ToList();
+                foreach (Fatura p in listAux)
                 {
-                    Console.Write("Nome Funcionário: ");
-                    Console.Write(p.nomeFuncionario);
-                    Console.Write("\nNome Cliente: ");
-                    Console.Write(p.nomeCliente);
-                    Console.WriteLine();
-                    Console.Write("\nNIF Cliente: ");
-                    Console.Write(p.nif);
-                    Console.WriteLine();
-                    Console.Write("\nProduct Name: ");
-                    Console.WriteLine();
                     double valor = 0;
                     Console.OutputEncoding = System.Text.Encoding.Unicode;
-                    List<string> lista = new List<string>();
-                    string row = "NOME PRODUTO|BARCODE|PREÇO UNITÁRIO|QUANTIDADE";
-                    int size = 0;
-                    lista.Add(row);
                     foreach (Vendas v in p.listaVendas)
                     {
-                        row = $"{v.productName}|{v.barcodeCompra}|{v.unitPrice}|{v.quantity}";
+                        row = $"{p.nomeFuncionario}|{p.nomeCliente}|{p.nif}|{v.productName}|{v.barcodeCompra}|{v.unitPrice}€|{v.quantity}";
                         if(row.Length > size)
                         {
                             size = row.Length;
@@ -99,16 +85,12 @@ namespace Supermercado.Data
                         lista.Add(row);
                         valor += Convert.ToDouble(v.unitPrice) * v.quantity;
                     }
-                    ToolsTable.Print(size, lista);
-                    Console.Write("\nVALOR TOTAL DA COMPRA: ");
-                    Console.Write("{0}€", valor);
-
-                    Console.WriteLine("\n###########################################");
-                    Console.ResetColor();
-
-                    Console.WriteLine();
-                    result += "";
+                    row = $"VALOR TOTAL||||||{valor}€";
+                    lista.Add(row);
+                    row = "||||||";
+                    lista.Add(row);
                 }
+                ToolsTable.Print(size, lista);
             }
             catch (Exception a)
             {
@@ -117,5 +99,25 @@ namespace Supermercado.Data
         }
         #endregion
 
+        #region Limpar Lista Faturas
+        public static void LimparLista()
+        {
+            try
+            {
+                listaFaturas.Clear();
+                string location = Directory.GetCurrentDirectory();
+
+                if (File.Exists(path))
+                {
+                    File.WriteAllText(path, string.Empty);
+                    Console.WriteLine("Lista de Faturas limpa!");
+                }
+            }
+            catch (Exception a)
+            {
+                Console.WriteLine("Couldn't clear the list! Reason: " + a.Message);
+            }
+        }
+        #endregion
     }
 }

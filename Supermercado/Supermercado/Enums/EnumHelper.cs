@@ -8,14 +8,6 @@ namespace Supermercado.Enums
 {
     public static class EnumHelper
     {
-        /// <summary>
-        /// Retrieve the description on the enum, e.g.
-        /// [Description("Bright Pink")]
-        /// BrightPink = 2,
-        /// Then when you pass in the enum, it will retrieve the description
-        /// </summary>
-        /// <param name="en">The Enumeration</param>
-        /// <returns>A string representing the friendly name</returns>
         public static string GetDescription(Enum en)
         {
             Type type = en.GetType();

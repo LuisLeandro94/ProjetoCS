@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 
@@ -65,51 +66,27 @@ namespace Supermercado.Data
         #region Listar na Console
         public static void EscreverListaConsola()
         {
+            LerProduto();
             try
             {
                 List<string> lista = new List<string>();
                 string row = "ID|NOME PRODUTO|BARCODE|PREÇO|STOCK|TIPO";
                 lista.Add(row);
                 int size = 0;
-                foreach (Produtos p in GestorProdutos.listaProdutos)
+                Console.OutputEncoding = System.Text.Encoding.Unicode;
+                foreach (Produtos p in listaProdutos)
                 {
                     if(p.stock >= 0)
                     {
-                        if(EnumHelper.GetDescription(p.produto) == "Congelados")
+                        row = $"{p.id}|{p.productName}|{p.barcodeNumber}|{p.unitPrice}€|{p.stock}|{p.produto}";
+                        if (row.Length > size)
                         {
-                            row = $"{p.id}|{p.productName}|{p.barcodeNumber}|{p.unitPrice}|{p.stock}|{p.produto}";
-                            if (row.Length > size)
-                            {
-                                size = row.Length;
-                            }
-                            lista.Add(row);
+                            size = row.Length;
                         }
-                        else
-                        {
-                            if(EnumHelper.GetDescription(p.produto) == "Enlatados")
-                            {
-                                row = $"{p.id}|{p.productName}|{p.barcodeNumber}|{p.unitPrice}|{p.stock}|{p.produto}";
-                                if (row.Length > size)
-                                {
-                                    size = row.Length;
-                                }
-                                lista.Add(row);
-                            }
-                            else
-                            {
-                                if(EnumHelper.GetDescription(p.produto) == "Prateleira")
-                                {
-                                    row = $"{p.id}|{p.productName}|{p.barcodeNumber}|{p.unitPrice}|{p.stock}|{p.produto}";
-                                    if (row.Length > size)
-                                    {
-                                        size = row.Length;
-                                    }
-                                    lista.Add(row);
-                                }
-                            }
-                        }
+                        lista.Add(row);
                     }
                 }
+                ToolsTable.Print(size, lista);
             }
             catch (Exception a)
             {
@@ -184,8 +161,24 @@ namespace Supermercado.Data
 
                 Console.Write("Nome Produto: ");
                 string novoProductName = Console.ReadLine();
+                foreach(Produtos p in GestorProdutos.listaProdutos)
+                {
+                    while(p.productName.ToLower().Contains(novoProductName.ToLower()))
+                    {
+                        Console.WriteLine("Produto já existente!");
+                        return;
+                    }
+                }
                 Console.Write("Barcode Produto: ");
                 string novoBarcode = Console.ReadLine();
+                foreach (Produtos p in GestorProdutos.listaProdutos)
+                {
+                    while (p.barcodeNumber.ToLower().Contains(novoBarcode.ToLower()))
+                    {
+                        Console.WriteLine("Produto já existente!");
+                        return;
+                    }
+                }
                 Console.Write("Unit Price: ");
                 string novoUnitPrice = Console.ReadLine();
                 Console.Write("Stock: ");
@@ -278,6 +271,40 @@ namespace Supermercado.Data
             catch(Exception a)
             {
                 Console.WriteLine("Couldn't clear the list! Reason: " + a.Message);
+            }
+        }
+        #endregion
+
+        #region Pesquisar Produtos
+        public static void PesquisaProdutos()
+        {
+            try
+            {
+                LerProduto();
+                Console.WriteLine("Insira o nome produto que quer pesquisar: ");
+                string nomeProduto = Console.ReadLine();
+                List<string> lista = new List<string>();
+                string row = "ID|NOME PRODUTO|BARCODE|PREÇO|STOCK|TIPO";
+                lista.Add(row);
+                int size = 0;
+                Console.OutputEncoding = System.Text.Encoding.Unicode;
+                foreach (Produtos p in listaProdutos)
+                {
+                    if (p.productName.ToLower().Equals(nomeProduto.ToLower()))
+                    {
+                        row = $"{p.id}|{p.productName}|{p.barcodeNumber}|{p.unitPrice}€|{p.stock}|{p.produto}";
+                        if (row.Length > size)
+                        {
+                            size = row.Length;
+                        }
+                        lista.Add(row);
+                    }
+                }
+                ToolsTable.Print(size, lista);
+            }
+            catch(Exception a)
+            {
+                Console.WriteLine("Impossível encontrar produto. Razão: " + a.Message);
             }
         }
         #endregion

@@ -27,6 +27,7 @@ namespace Supermercado.Data
             {
                 List<Vendas> listaTemp = new List<Vendas>();
                 int resposta;
+                GestorFaturas.LerFaturas();
 
                 GestorProdutos.EscreverListaConsola();
                 Console.Write("Cliente: ");
@@ -55,7 +56,7 @@ namespace Supermercado.Data
                         }
                     }
 
-                    Caixa.EditaStock(nomeCliente, barcodecompra, quantidade);
+                    Caixa.EditaStock(barcodecompra, quantidade);
 
                     Console.WriteLine("Deseja comprar mais produtos? (1) - Sim | (0) - Não");
                     resposta = Convert.ToInt32(Console.ReadLine());
@@ -97,14 +98,16 @@ namespace Supermercado.Data
                 double pagamento = Convert.ToDouble(Console.ReadLine());
                 while (pagamento < valor)
                 {
-                    Console.WriteLine("Está em falta: {0}€", valor - pagamento);
+                    double valorEmFalta = valor - pagamento;
+                    Console.WriteLine("Está em falta: {0}€", Math.Round(valorEmFalta,2));
                     Console.WriteLine("Receber mais dinheiro: ");
                     double novopagamento = Convert.ToDouble(Console.ReadLine());
                     pagamento = pagamento + novopagamento;
                 }
                 if (pagamento > valor)
                 {
-                    Console.WriteLine("Troco: {0}€", pagamento - valor);
+                    double trocoAReceber = pagamento - valor;
+                    Console.WriteLine("Troco: {0}€", Math.Round(trocoAReceber, 2));
                 }
                 string nif_;
                 int nif;
@@ -132,6 +135,7 @@ namespace Supermercado.Data
                 Fatura fatura = new Fatura(funcionario.ToString(), nomeCliente, listaTemp, nif);
 
                 GestorFaturas.listaFaturas.Add(fatura);
+                GestorProdutos.GravarProduto();
 
                 GestorFaturas.GravarFaturas();
             }

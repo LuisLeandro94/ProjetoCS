@@ -38,6 +38,10 @@ namespace Supermercado
                 Console.WriteLine("#                                                #");
                 Console.WriteLine("#------------------------------------------------#");
                 Console.WriteLine("#                                                #");
+                Console.WriteLine("#         4 - LIMPAR LISTA FATURAS               #");
+                Console.WriteLine("#                                                #");
+                Console.WriteLine("#------------------------------------------------#");
+                Console.WriteLine("#                                                #");
                 Console.WriteLine("#         0 - SAIR                               #");
                 Console.WriteLine("#                                                #");
                 Console.WriteLine("##################################################");
@@ -56,11 +60,15 @@ namespace Supermercado
                     case 3:
                         GestorProdutos.EscreverListaConsola();
                         break;
+                    case 4:
+                        GestorFaturas.LimparLista();
+                        break;
                     case 0:
                         MenuInicial.InitialMenu();
                         break;
                     default:
                         Console.WriteLine("Opção Inválida");
+                        MenuCaixa(funcionario);
                         break;
                 }
                 Console.ReadKey();
@@ -72,11 +80,11 @@ namespace Supermercado
         #region Métodos
 
         #region Edit Stock
-        static public Produtos EditaStock(string nomeCliente, string nome, double novoStock)
+        static public Produtos EditaStock(string barcodeCompra, double novoStock)
         {
             try
             {
-                Produtos produtoAEditar = FindProduct(nome);
+                Produtos produtoAEditar = FindProduct(barcodeCompra);
 
                 if (produtoAEditar != null)
                 {
@@ -98,13 +106,13 @@ namespace Supermercado
         #endregion
 
         #region Find Product
-        static public Produtos FindProduct(string productName)
+        static public Produtos FindProduct(string barcodeCompra)
         {
             try
             {
                 foreach (Produtos p in GestorProdutos.listaProdutos)
                 {
-                    if (p.productName.ToLower().Equals(productName.ToLower()))
+                    if (p.barcodeNumber.ToLower().Equals(barcodeCompra.ToLower()))
                     {
                         return p;
                     }
