@@ -11,6 +11,9 @@ namespace Supermercado
     [Serializable]
     public class Produtos
     {
+        static public List<Produtos> productList = new List<Produtos>();
+        static public string path { get; } = ConfigurationManager.AppSettings["produtosPath"];
+
         #region Properties
         public int id { get; set; }
         public string barcodeNumber { get; set; }
@@ -28,9 +31,6 @@ namespace Supermercado
             return id;
         }
         #endregion
-
-        static public List<Produtos> productList = new List<Produtos>();
-        static public string path = ConfigurationManager.AppSettings["produtosPath"];
 
         #region Constructors
         public Produtos()

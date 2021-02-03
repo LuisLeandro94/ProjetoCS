@@ -20,7 +20,6 @@ namespace Supermercado
         public void MenuRepositor()
         {
             GestorProdutos.LerProduto();
-
             int escolha = 0;
             while (escolha != 7)
             {

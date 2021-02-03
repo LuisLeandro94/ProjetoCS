@@ -77,8 +77,6 @@ namespace Supermercado
         }
         #endregion
 
-        #region Métodos
-
         #region Edit Stock
         static public Produtos EditaStock(string barcodeCompra, double novoStock)
         {
@@ -125,8 +123,6 @@ namespace Supermercado
             }
             return null;
         }
-        #endregion
-
         #endregion
     }
 }

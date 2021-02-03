@@ -7,18 +7,23 @@ namespace Supermercado.Data
     [Serializable]
     class Vendas
     {
+
+        #region Properties
         public string productName { get; set; }
-        public double quantity { get; set; }
+        public int quantity { get; set; }
         public string barcodeCompra { get; set; }
         public string unitPrice { get; set; }
+        #endregion
 
-        public Vendas(string productName, double quantity, string barcodeCompra, string unitPrice)
+        #region Constructors
+        public Vendas(string productName, int quantity, string barcodeCompra, string unitPrice)
         {
             this.productName = productName;
             this.quantity = quantity;
             this.barcodeCompra = barcodeCompra;
             this.unitPrice = unitPrice;
         }
+        #endregion
 
         #region Venda
         public static void Venda(Funcionario funcionario)
@@ -40,18 +45,18 @@ namespace Supermercado.Data
                     string barcodecompra = Console.ReadLine();
 
                     Console.Write("\nQuantidade a comprar: ");
-                    double quantidade = Convert.ToDouble(Console.ReadLine());
+                    int quantidade = Convert.ToInt32(Console.ReadLine());
 
                     foreach (Produtos p in GestorProdutos.listaProdutos)
                     {
                         if (p.barcodeNumber.ToLower().Equals(barcodecompra.ToLower()))
                         {
-                            if (p.stock <= 0 || p.stock < quantidade)
+                            while(p.stock <= 0 || p.stock < quantidade || quantidade<0)
                             {
                                 Console.WriteLine("Produto esgotado! Escolha outro produto: ");
                                 barcodecompra = Console.ReadLine();
                                 Console.WriteLine("Quantidade a comprar: ");
-                                quantidade = Convert.ToDouble(Console.ReadLine());
+                                quantidade = Convert.ToInt32(Console.ReadLine());
                             }
                         }
                     }
@@ -60,7 +65,7 @@ namespace Supermercado.Data
 
                     Console.WriteLine("Deseja comprar mais produtos? (1) - Sim | (0) - Não");
                     resposta = Convert.ToInt32(Console.ReadLine());
-
+                    
                     foreach (Produtos p in GestorProdutos.listaProdutos)
                     {
                         if (p.barcodeNumber.ToLower().Equals(barcodecompra.ToLower()))
@@ -133,10 +138,8 @@ namespace Supermercado.Data
                     nif = 000000000;
                 }
                 Fatura fatura = new Fatura(funcionario.ToString(), nomeCliente, listaTemp, nif);
-
                 GestorFaturas.listaFaturas.Add(fatura);
                 GestorProdutos.GravarProduto();
-
                 GestorFaturas.GravarFaturas();
             }
             catch(Exception a)

@@ -12,7 +12,7 @@ namespace Supermercado.Data
     class GestorFaturas
     {
         static public List<Fatura> listaFaturas = new List<Fatura>();
-        public static string path = ConfigurationManager.AppSettings["faturasPath"];
+        public static string path { get; } = ConfigurationManager.AppSettings["faturasPath"];
 
         #region Gravar Faturas
         public static void GravarFaturas()

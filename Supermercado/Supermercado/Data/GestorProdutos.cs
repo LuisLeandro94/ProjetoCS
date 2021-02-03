@@ -14,7 +14,7 @@ namespace Supermercado.Data
     class GestorProdutos
     {
         static public List<Produtos> listaProdutos = new List<Produtos>();
-        static public string path = ConfigurationManager.AppSettings["produtosPath"];
+        static public string path { get; } = ConfigurationManager.AppSettings["produtosPath"];
 
         #region Gravar Produto
         public static void GravarProduto()

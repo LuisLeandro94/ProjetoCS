@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Luis Ribeiro\\Desktop\\ProjetoCS\\Supermercado\\Supermercado\\Supermercado.csproj": {}
+    "C:\\Users\\ferma\\Dropbox\\My PC (LAPTOP-OQG2DRPV)\\Desktop\\ProjetoCS\\Supermercado\\Supermercado\\Supermercado.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Luis Ribeiro\\Desktop\\ProjetoCS\\Supermercado\\Supermercado\\Supermercado.csproj": {
+    "C:\\Users\\ferma\\Dropbox\\My PC (LAPTOP-OQG2DRPV)\\Desktop\\ProjetoCS\\Supermercado\\Supermercado\\Supermercado.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Luis Ribeiro\\Desktop\\ProjetoCS\\Supermercado\\Supermercado\\Supermercado.csproj",
+        "projectUniqueName": "C:\\Users\\ferma\\Dropbox\\My PC (LAPTOP-OQG2DRPV)\\Desktop\\ProjetoCS\\Supermercado\\Supermercado\\Supermercado.csproj",
         "projectName": "Supermercado",
-        "projectPath": "C:\\Users\\Luis Ribeiro\\Desktop\\ProjetoCS\\Supermercado\\Supermercado\\Supermercado.csproj",
-        "packagesPath": "C:\\Users\\Luis Ribeiro\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Luis Ribeiro\\Desktop\\ProjetoCS\\Supermercado\\Supermercado\\obj\\",
+        "projectPath": "C:\\Users\\ferma\\Dropbox\\My PC (LAPTOP-OQG2DRPV)\\Desktop\\ProjetoCS\\Supermercado\\Supermercado\\Supermercado.csproj",
+        "packagesPath": "C:\\Users\\ferma\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ferma\\Dropbox\\My PC (LAPTOP-OQG2DRPV)\\Desktop\\ProjetoCS\\Supermercado\\Supermercado\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Luis Ribeiro\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ferma\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,7 +26,6 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
-            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -38,7 +37,6 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "targetAlias": "netcoreapp3.1",
           "dependencies": {
             "System.Configuration.ConfigurationManager": {
               "target": "Package",
@@ -60,7 +58,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.405\\RuntimeIdentifierGraph.json"
         }
       }
     }

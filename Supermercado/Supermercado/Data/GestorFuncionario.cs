@@ -13,7 +13,7 @@ namespace Supermercado
     {
 
         static public List<Funcionario> listaFuncionarios = new List<Funcionario>();
-        public static string path = ConfigurationManager.AppSettings["funcionariosPath"];
+        public static string path { get;} = ConfigurationManager.AppSettings["funcionariosPath"]; 
 
         #region Gravar Funcionário
         public static void GravarFuncionario()

@@ -10,7 +10,7 @@ namespace Supermercado.Data
         static private int tableWidth;
         static private List<string> table;
 
-
+        #region Print 
         static public void Print(int tableWidth_, List<string> table_)
         {
             try
@@ -30,7 +30,7 @@ namespace Supermercado.Data
 
                 PrintLine();
             }
-            catch(Exception a)
+            catch (Exception a)
             {
                 Console.WriteLine("Impossível printar lista. Razão: " + a.Message);
             }
@@ -42,7 +42,7 @@ namespace Supermercado.Data
             {
                 Console.WriteLine(new string('-', tableWidth));
             }
-            catch(Exception a)
+            catch (Exception a)
             {
                 Console.WriteLine("Impossivel printar lista. Razão: " + a.Message);
             }
@@ -67,7 +67,9 @@ namespace Supermercado.Data
                 Console.WriteLine("Impossivel printar lista. Razão: " + a.Message);
             }
         }
+        #endregion Print
 
+        #region Align
         static private string AlignCentre(string text, int width)
         {
             try
@@ -88,5 +90,7 @@ namespace Supermercado.Data
                 return a.Message;
             }
         }
+        #endregion
+
     }
 }
